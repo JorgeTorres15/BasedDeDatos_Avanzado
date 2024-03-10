@@ -85,9 +85,9 @@ create table if not exists Platillos(
         Total float not null ,
         Fecha datetime not null,
         Entregado varchar(2) not null default "No",
-		foreign key (ID_Cliente) references Clientes(ID_Cliente),
-		foreign key (ID_Personal) references Personal(ID_Personal),
-		foreign key (ID_Platillo) references Platillos(ID_Platillo)
+	foreign key (ID_Cliente) references Clientes(ID_Cliente),
+	foreign key (ID_Personal) references Personal(ID_Personal),
+	foreign key (ID_Platillo) references Platillos(ID_Platillo)
         );
 
 
