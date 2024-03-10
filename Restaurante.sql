@@ -78,7 +78,7 @@ create table if not exists Platillos(
     );
     
     create table if not exists Pedidos(
-		ID_Pedido int primary key auto_increment,
+	ID_Pedido int primary key auto_increment,
         ID_Cliente int not null,
         ID_Personal int not null,
         ID_Platillo int not null,
