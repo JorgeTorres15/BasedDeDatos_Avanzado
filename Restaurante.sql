@@ -102,4 +102,12 @@ create role Empleado;
 grant create , update , select on chinatown.* to Empleado;
 revoke create ,update , drop on chinatown.personal from Empleados;
 
+CREATE VIEW Roles_Personal AS
+SELECT p.nombre, p.apellido, p.sueldo, r.nombre AS rol
+FROM Personal p
+JOIN Rol r ON p.ID_Rol = r.ID_Rol;
 
+CREATE VIEW Categorias_Platillos AS
+SELECT c.nombre AS categoria, p.nombre, p.descripcion, p.precio
+FROM Platillos p
+JOIN Categorias c ON p.id_categoria = c.id_categoria;
