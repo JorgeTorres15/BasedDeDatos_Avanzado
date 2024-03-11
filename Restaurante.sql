@@ -96,10 +96,10 @@ create role Adimistrador;
 grant all privileges on chinatown.* to Administrador;
 
 create role Auditor;
-grant create,update,select on chinatown.* to Auditor;
+grant create ,update ,select on chinatown.* to Auditor;
 
 create role Empleado;
-grant create,update,select on chinatown.* to Empleado;
-revoke create,update,drop on chinatown.personal from Empleados;
+grant create , update , select on chinatown.* to Empleado;
+revoke create ,update , drop on chinatown.personal from Empleados;
 
 
