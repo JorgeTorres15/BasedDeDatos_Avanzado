@@ -134,3 +134,24 @@ SELECT pl.nombre, SUM(pe.total) AS Ingresos
 FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
+
+DELIMITER //
+CREATE TRIGGER validartelefono BEFORE INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+    IF NEW.telefono = '' THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Se requiere un numero de telefono para el cliente';
+    END IF;
+END//
+DELIMITER //
+
+DELIMITER //
+CREATE TRIGGER validarcorreo BEFORE INSERT ON Provedores
+FOR EACH ROW
+BEGIN
+    IF NEW.correo = '' THEN
+        SET NEW.correo = 'Se requiere un correo para el proveedor';
+    END IF;
+END//
+DELIMITER //
