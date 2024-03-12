@@ -92,7 +92,7 @@ create table if not exists Platillos(
 
 show tables;
 
-create role Adimistrador;
+create role Administrador;
 grant all privileges on chinatown.* to Administrador;
 
 create role Auditor;
