@@ -117,9 +117,10 @@ revoke create ,update , drop on chinatown.personal from Empleados;
 
 -- Roles del personal
 CREATE VIEW Roles_Personal AS
-SELECT p.nombre, p.apellido, p.sueldo, r.nombre AS rol
+SELECT p.nombre, p.apellido, r.nombre AS rol
 FROM Personal p
-JOIN Rol r ON p.ID_Rol = r.ID_Rol;
+JOIN Rol r ON p.ID_Rol = r.ID_Rol
+JOIN Sueldos s ON s.ID_Rol = s.ID_Rol;
 
 -- Platillos por categoria
 CREATE VIEW Categorias_Platillos AS
