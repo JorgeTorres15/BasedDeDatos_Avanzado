@@ -102,12 +102,35 @@ create role Empleado;
 grant create , update , select on chinatown.* to Empleado;
 revoke create ,update , drop on chinatown.personal from Empleados;
 
+-- Roles del personal
 CREATE VIEW Roles_Personal AS
 SELECT p.nombre, p.apellido, p.sueldo, r.nombre AS rol
 FROM Personal p
 JOIN Rol r ON p.ID_Rol = r.ID_Rol;
 
+-- Platillos por categoria
 CREATE VIEW Categorias_Platillos AS
 SELECT c.nombre AS categoria, p.nombre, p.descripcion, p.precio
 FROM Platillos p
 JOIN Categorias c ON p.id_categoria = c.id_categoria;
+
+-- Tipos de proveedores
+CREATE VIEW Proveedor_Tipo AS
+SELECT tp.nombre AS Tipo, p.nombre, p.telefono, p.correo
+FROM Provedores p
+JOIN Tipo_Provedores tp ON p.id_tipoprovedores = tp.id_tipoprovedores;
+
+-- Informacion completa de pedidos
+CREATE VIEW Info_Pedidos AS
+SELECT pe.id_pedido, cl.nombre AS Cliente, pe.fecha, pe.total, pe.entregado, per.nombre AS atendido_por, pl.nombre AS platillo
+FROM Pedidos pe
+JOIN Clientes cl ON pe.id_cliente = cl.id_cliente
+JOIN Personal per ON pe.id_personal = per.id_personal
+JOIN Platillos pl ON pe.id_platillo = pl.id_platillo;
+
+-- Ingresos por platillos
+CREATE VIEW Ingresos_Platillos AS
+SELECT pl.nombre, SUM(pe.total) AS Ingresos
+FROM Pedidos pe
+JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
+GROUP BY pl.nombre;
