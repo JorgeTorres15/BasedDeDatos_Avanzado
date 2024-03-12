@@ -59,11 +59,13 @@ create table if not exists Materiales (
     foreign key (ID_Provedor) references Provedores(ID_Provedor)
     );
 
+
 create table if not exists Ingredientes(
 	ID_Ingredientes int primary key auto_increment,
     ID_Provedor int not null,
     Nombre varchar(50) not null,
     Fecha_Recepcion datetime not null,
+    stock int default 0,
     Concervacion varchar(50) not null,
     foreign key (ID_Provedor) references Provedores(ID_Provedor)
     );
