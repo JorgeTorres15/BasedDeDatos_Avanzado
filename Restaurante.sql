@@ -148,8 +148,21 @@ FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
 
--- Store Procedure
+-- Inventario Bajo Materiales
+CREATE VIEW Inventario_Bajo_Materiales AS
+SELECT m.nombre AS materiales, m.stock AS materiales_stock
+FROM Materiales m
+JOIN Provedores p ON m.ID_Provedor = p.ID_Provedor
+WHERE m.Stock < 10;
 
+-- Inventario Bajo Ingredientes
+CREATE VIEW Inventario_Bajo_Ingredientes AS
+SELECT i.nombre AS ingredientes, i.stock AS ingredientes_stock
+FROM Ingredientes i
+JOIN Provedores p ON i.ID_Provedor = p.ID_Provedor
+WHERE i.Stock < 10;
+
+-- Store Procedure
 
 DELIMITER //
 create procedure Insertar_Personal(
