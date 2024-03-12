@@ -19,12 +19,19 @@ create table if not exists Rol(
     Nombre varchar (50)
     );
 
+show TABLES;
+
+create table if not exists Sueldos(
+	ID_Sueldos int primary key auto_increment,
+    ID_Rol int not null,
+    foreign key (ID_Rol) references Rol(ID_Rol),
+    Sueldo float not null);
+
 create table if not exists Personal(
 	ID_Personal int primary key auto_increment,
     Nombre varchar(50) not null,
     Apellido varchar(50) not null,
     Telefono int not null,
-    Sueldo float not null,
     Fecha_ingreso datetime not null,
     ID_Rol int not null,
     foreign key (ID_Rol) references Rol(ID_Rol)
@@ -78,18 +85,17 @@ create table if not exists Platillos(
     );
     
     create table if not exists Pedidos(
-	ID_Pedido int primary key auto_increment,
+		ID_Pedido int primary key auto_increment,
         ID_Cliente int not null,
         ID_Personal int not null,
         ID_Platillo int not null,
         Total float not null ,
         Fecha datetime not null,
         Entregado varchar(2) not null default "No",
-	foreign key (ID_Cliente) references Clientes(ID_Cliente),
-	foreign key (ID_Personal) references Personal(ID_Personal),
-	foreign key (ID_Platillo) references Platillos(ID_Platillo)
+		foreign key (ID_Cliente) references Clientes(ID_Cliente),
+		foreign key (ID_Personal) references Personal(ID_Personal),
+		foreign key (ID_Platillo) references Platillos(ID_Platillo)
         );
-
 show tables;
 
 create role Administrador;
@@ -155,3 +161,8 @@ BEGIN
     END IF;
 END//
 DELIMITER //
+
+  
+
+
+
