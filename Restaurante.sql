@@ -31,7 +31,7 @@ create table if not exists Personal(
 	ID_Personal int primary key auto_increment,
     Nombre varchar(50) not null,
     Apellido varchar(50) not null,
-    Telefono int not null,
+    Telefono varchar(50),
     Fecha_ingreso datetime not null,
     ID_Rol int not null,
     foreign key (ID_Rol) references Rol(ID_Rol)
@@ -143,8 +143,24 @@ FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
 
+-- Store Procedure
 
 
+DELIMITER //
+create procedure Insertar_Personal(
+    in p_Nombre varchar(50),
+    in p_Apellido varchar(50),
+    in p_Telefono varchar(50),
+    in p_Fecha_ingreso datetime,
+    in p_ID_Rol int
+)
+begin
+    insert into Personal(Nombre, Apellido, Telefono, Fecha_ingreso, ID_Rol)
+    values(p_Nombre, p_Apellido, p_Telefono, p_Fecha_ingreso, p_ID_Rol);
+end//
+DELIMITER ;
+
+call Insertar_Personal("Marcos","Lopez",6643470809,now(),1);
   
 
 
