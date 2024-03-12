@@ -36,6 +36,12 @@ create table if not exists Personal(
     ID_Rol int not null,
     foreign key (ID_Rol) references Rol(ID_Rol)
     );
+ 
+create table Pesonal_Bitacora(
+	ID_Bitacora int primary key auto_increment,
+    ID_Anterior int not null,
+    Nombre varchar(50) not null ,
+    Fecha_renuncia datetime);
 
 create table if not exists Tipo_Provedores(
 	ID_Tipoprovedores int primary key auto_increment,
@@ -58,7 +64,6 @@ create table if not exists Materiales (
     ID_Provedor int,
     foreign key (ID_Provedor) references Provedores(ID_Provedor)
     );
-
 
 create table if not exists Ingredientes(
 	ID_Ingredientes int primary key auto_increment,
