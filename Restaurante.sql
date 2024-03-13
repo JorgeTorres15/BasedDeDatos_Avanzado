@@ -325,7 +325,7 @@ CALL Insertar_Material("Carrito de Servicio", 2, 7);
 CALL Insertar_Material("Mostrador de Bar", 2, 11);
 CALL Insertar_Material("Refrigerador de Bebidas", 2, 11);
 
-Delimiter//
+Delimiter //
 create procedure Insertar_Ingredientes(
 	in I_ID_Provedor int,
     in I_Nombre varchar(50),
@@ -335,10 +335,87 @@ create procedure Insertar_Ingredientes(
 )
 begin
 	insert into Ingredientes(ID_Provedor,Nombre,Fecha_Recepcion,stock,Concervacion)
-    values (I_ID_Provedor,I_Nombre,I_Fecha_Recepcion,I_stock,I_Concervacion)
+    values (I_ID_Provedor,I_Nombre,I_Fecha_Recepcion,I_stock,I_Concervacion);
     
 end//
 Delimiter ;
+
+CALL Insertar_Ingredientes(1, 'pechuga de pollo', NOW(), 30, 'Refrigerado');
+CALL Insertar_Ingredientes(1, 'pierna de cerdo', NOW(), 25, 'Refrigerado');
+CALL Insertar_Ingredientes(1, 'carne de res', NOW(), 28, 'Refrigerado');
+CALL Insertar_Ingredientes(5, 'carne de pato', NOW(), 35, 'Refrigerado');
+CALL Insertar_Ingredientes(5, 'camarones', NOW(), 40, 'Refrigerado');
+CALL Insertar_Ingredientes(1, 'ternera', NOW(), 32, 'Refrigerado');
+CALL Insertar_Ingredientes(1, 'pato', NOW(), 37, 'Refrigerado');
+CALL Insertar_Ingredientes(5, 'cerdo', NOW(), 29, 'Refrigerado');
+CALL Insertar_Ingredientes(5, 'carne de cordero', NOW(), 33, 'Refrigerado');
+CALL Insertar_Ingredientes(5, 'carne de buey', NOW(), 36, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'col china', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'brócoli chino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'judías verdes chinas', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'pimiento chino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'berenjena china', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'calabacín chino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'nabo chino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'repollo chino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'espárragos chinos', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'col rizada china', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'zanahoria', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'cebolla', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'pimiento', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'tomate', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'espinacas', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'calabacín', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'pepino', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'patata', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(9, 'calabaza', NOW(), 50, 'Refrigerado');
+CALL Insertar_Ingredientes(2, 'berenjena', NOW(), 50, 'Refrigerado');
+-- Lácteos
+CALL Insertar_Ingredientes(3, 'queso', NOW(), 10, 'Refrigerado');
+CALL Insertar_Ingredientes(3, 'yogur', NOW(), 15, 'Refrigerado');
+CALL Insertar_Ingredientes(3, 'crema', NOW(), 8, 'Refrigerado');
+CALL Insertar_Ingredientes(3, 'mantequilla', NOW(), 7, 'Refrigerado');
+CALL Insertar_Ingredientes(3, 'helado', NOW(), 20, 'Refrigerado');
+-- Pescadería
+CALL Insertar_Ingredientes(4, 'camarones', NOW(), 20, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'calamares', NOW(), 15, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'pulpo', NOW(), 18, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'langostinos', NOW(), 12, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'almejas', NOW(), 10, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'salmón', NOW(), 22, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'atún', NOW(), 25, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'bacalao', NOW(), 17, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'ostras', NOW(), 8, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'trucha', NOW(), 14, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'mejillones', NOW(), 11, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'vieiras', NOW(), 13, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'tilapia', NOW(), 16, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'rape', NOW(), 19, 'Refrigerado');
+CALL Insertar_Ingredientes(4, 'anguila', NOW(), 21, 'Refrigerado');
+CALL Insertar_Ingredientes(12, 'cangrejo', NOW(), 23, 'Refrigerado');
+-- Dulcería
+CALL Insertar_Ingredientes(6, 'helado', NOW(), 5, 'Refrigerado');
+CALL Insertar_Ingredientes(6, 'galletas', NOW(), 200, 'Refrigerado');
+
+
+describe Categorias;
+Delimiter //
+create procedure Insertar_Categorias(
+	in Cat_Nombre varchar(50)
+) 
+begin
+	insert into Categorias (Nombre) 
+    values (Cat_Nombre);
+
+end //
+Delimiter ;
+
+call Insertar_Categorias("Normal");
+call Insertar_Categorias("Frio");
+call Insertar_Categorias("Especial");
+
+describe Platillos;
+describe Pedidos;
 
 -- Me faltan 3 store Procedure los subo para manana antes de las 7am
 -- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
