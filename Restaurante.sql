@@ -51,7 +51,7 @@ create table if not exists Provedores(
     Nombre varchar(50) not null,
     ID_Tipoprovedores int not null,
     foreign key (ID_Tipoprovedores) references Tipo_Provedores(ID_Tipoprovedores),
-    Telefono int not null,
+    Telefono varchar(50),
     Correo varchar(50) default "Sin correo"
     );
 
