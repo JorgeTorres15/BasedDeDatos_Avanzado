@@ -104,14 +104,15 @@ create table if not exists Platillos(
 		foreign key (ID_Platillo) references Platillos(ID_Platillo)
         );
         
-show tables;
-
+drop role if exists Administrador;
 create role Administrador;
 grant all privileges on chinatown.* to Administrador;
 
+drop role if exists Auditor;
 create role Auditor;
 grant create ,update ,select on chinatown.* to Auditor;
 
+drop role if exists Empleado;
 create role Empleado;
 grant create , update , select on chinatown.* to Empleado;
 revoke create ,update , drop on chinatown.personal from Empleados;
