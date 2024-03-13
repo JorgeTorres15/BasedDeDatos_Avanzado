@@ -114,8 +114,7 @@ grant create ,update ,select on chinatown.* to Auditor;
 
 drop role if exists Empleado;
 create role Empleado;
-grant create , update , select on chinatown.* to Empleado;
-revoke create ,update , drop on chinatown.personal from Empleados;
+grant select on chinatown.* to Empleado;
 
 
 -- Roles del personal
