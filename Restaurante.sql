@@ -1,3 +1,5 @@
+drop database chinatown;
+
 CREATE DATABASE ChinaTown;
 USE ChinaTown;
 
@@ -104,15 +106,15 @@ create table if not exists Platillos(
         
 show tables;
 
--- create role Administrador;
--- grant all privileges on chinatown.* to Administrador;
+create role Administrador;
+grant all privileges on chinatown.* to Administrador;
 
--- create role Auditor;
--- grant create ,update ,select on chinatown.* to Auditor;
+create role Auditor;
+grant create ,update ,select on chinatown.* to Auditor;
 
--- create role Empleado;
--- grant create , update , select on chinatown.* to Empleado;
--- revoke create ,update , drop on chinatown.personal from Empleados;
+create role Empleado;
+grant create , update , select on chinatown.* to Empleado;
+revoke create ,update , drop on chinatown.personal from Empleados;
 
 
 -- Roles del personal
@@ -284,7 +286,8 @@ begin
     values(P_Nombre,P_ID_Tipoprovedores,P_Telefono,P_Correo);
 end//
 Delimiter //
-select * from Provedores;
+
+
 call Insertar_Provedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
 call insertar_provedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
 call insertar_provedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
@@ -412,10 +415,6 @@ call Insertar_material('bandejas', 80, 13);
 call Insertar_material('copas', 120, 13);
 call Insertar_material('cuchillos', 350, 13);
 
-select * from Materiales;
-describe materiales;
-select * from Provedores;
-select * from Tipo_provedores;
 
--- Me faltan 8 store Procedure los subo para manana antes de las 7am
+-- Me faltan 3 store Procedure los subo para manana antes de las 7am
 -- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
