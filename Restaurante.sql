@@ -252,5 +252,161 @@ Call Insertar_sueldos(3,1800);
 Call Insertar_sueldos(4,2600);
 Call Insertar_sueldos(5,2500);
 
--- Me faltan 8 store Procedure los subo para manana antes de las 7am
+-- Tipo Provedores
+Delimiter //
+create procedure Insertar_Tipo_Provedores(
+	in tp_Nombre varchar(50)
+)
+begin
+	insert into Tipo_Provedores(Nombre)
+    values (tp_Nombre);
+end//Insertar_Tipo_Provedores
+Delimiter ;
+
+call Insertar_Tipo_Provedores("Servicio al Cliente");
+call Insertar_Tipo_Provedores("Verduras");
+call Insertar_Tipo_Provedores("Carnes");
+call Insertar_Tipo_Provedores("Mariscos");
+call Insertar_Tipo_Provedores("Materiales inmuebles");
+call Insertar_Tipo_Provedores("Materiales cosina");
+call Insertar_Tipo_Provedores("Otros");
+
+-- Provedores
+Delimiter //
+create procedure Insertar_Provedores(
+    in P_Nombre varchar(50),
+    in P_ID_Tipoprovedores int,
+    in P_Telefono varchar(50),
+    in P_Correo varchar(50)
+)
+begin
+	insert into Provedores(Nombre,ID_Tipoprovedores,Telefono,Correo) 
+    values(P_Nombre,P_ID_Tipoprovedores,P_Telefono,P_Correo);
+end//
+Delimiter //
+select * from Provedores;
+call Insertar_Provedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
+call insertar_provedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
+call insertar_provedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
+call insertar_provedores("Pescadería Martínez", 4, "6693456789", "ana.martinez@pescaderia.com");
+call insertar_provedores("Cerdos Piggy",3, "6604567890", "carlos.gonzalez@panaderia.com");
+call insertar_provedores("Dulcería Sánchez", 7, "6615678901", "sofia.sanchez@dulceria.com");
+call insertar_provedores("Ferretería Rodríguez", 6, "6626789012", "alejandro.rodriguez@ferreteria.com");
+call insertar_provedores("IKEA", 5, "6648901234", "pablo.diaz@IKEA.com");
+call insertar_provedores("SR.Yamato", 2 , "6659012345", "luisa.martin@takataka.com");
+call insertar_provedores("IKEA", 6, "6660123456", "ana.fernandez@electrodomesticos.com");
+call insertar_provedores("Mueblería Ruiz", 6, "6671234567", "javier.ruiz@muebleria.com");
+call insertar_provedores("Mar profundo", 4, "6615678901", "sofia.herrera@example.com");
+call insertar_provedores("Todo X Comensales", 1, "6643679864", "sofia.herrera@example.com");
+
+Delimiter //
+create procedure Insertar_Material(
+	in M_Nombre varchar(50),
+    in M_Stock int ,
+    in M_ID_Provedor int
+)
+begin
+	insert into Materiales(Nombre,Stock,ID_Provedor)
+    values(M_Nombre,M_Stock,M_ID_Provedor);
+end//
+Delimiter ;
+
+call insertar_material('pechuga de pollo', 30, 1);
+call insertar_material('pierna de cerdo', 25, 1);
+call insertar_material('carne de res', 28, 1);
+call insertar_material('carne de pato', 35, 5);
+call insertar_material('camarones', 40, 5);
+call insertar_material('ternera', 32, 1);
+call insertar_material('pato', 37, 1);
+call insertar_material('cerdo', 29, 5);
+call insertar_material('carne de cordero', 33, 5);
+call insertar_material('carne de buey', 36, 5);
+-- verduras
+call insertar_material('col china', 50, 2);
+call insertar_material('brócoli chino', 50, 2);
+call insertar_material('judías verdes chinas', 50, 2);
+call insertar_material('pimiento chino', 50, 2);
+call insertar_material('berenjena china', 50, 2);
+call insertar_material('calabacín chino', 50, 2);
+call insertar_material('nabo chino', 50, 2);
+call insertar_material('repollo chino', 50, 2);
+call insertar_material('espárragos chinos', 50, 2);
+call insertar_material('col rizada china', 50, 2);
+call insertar_material('zanahoria', 50, 2);
+call insertar_material('cebolla', 50, 2);
+call insertar_material('pimiento', 50, 2);
+call insertar_material('tomate', 50, 2);
+call insertar_material('espinacas', 50, 2);
+call insertar_material('calabacín', 50, 2);
+call insertar_material('pepino', 50, 2);
+call insertar_material('patata', 50, 2);
+call insertar_material('calabaza', 50, 2);
+call insertar_material('berenjena', 50, 2);
+-- Lacteos
+call insertar_material('queso', 10, 3);
+call insertar_material('yogur', 15, 3);
+call insertar_material('crema', 8, 3);
+call insertar_material('mantequilla', 7, 3);
+call insertar_material('helado', 20, 3);
+-- pescaderia 
+call insertar_material('camarones', 20, 4);
+call insertar_material('calamares', 15, 15);
+call insertar_material('pulpo', 18, 4);
+call insertar_material('langostinos', 12, 15);
+call insertar_material('almejas', 10, 4);
+call insertar_material('salmón', 22, 15);
+call insertar_material('atún', 25, 4);
+call insertar_material('bacalao', 17, 15);
+call insertar_material('ostras', 8, 4);
+call insertar_material('trucha', 14, 15);
+call insertar_material('mejillones', 11, 4);
+call insertar_material('vieiras', 13, 15);
+call insertar_material('tilapia', 16, 4);
+call insertar_material('rape', 19, 15);
+call insertar_material('anguila', 21, 4);
+call insertar_material('cangrejo', 23, 15);
+-- Dulceria
+call insertar_material("helado",5,6);
+call insertar_material("galletas",200,6);
+--  Ferreteria
+call insertar_material('freidora eléctrica', 2, 7);
+call insertar_material('cesta de freír', 2, 7);
+call insertar_material('espumadera', 1, 7);
+call insertar_material('papel absorbente', 1, 7);
+call insertar_material('tapadera para freír', 2, 7);
+call insertar_material('aceite para freír', 3, 7);
+call insertar_material('termómetro para aceite', 2, 7);
+call insertar_material('plato escurridor', 1, 7);
+call insertar_material('pinzas de cocina', 3, 7);
+call insertar_material('pala para freír', 2, 7);
+call insertar_material('bandeja para escurrir', 1, 7);
+call insertar_material('papel pergamino', 1, 7);
+call insertar_material('soporte para cucharas', 2, 7);
+call insertar_material('guantes resistentes al calor', 3, 7);
+-- Muebles de local
+call insertar_material('mesas', 30, 8);
+call insertar_material('mostradores', 15, 8);
+call insertar_material('estantes', 20, 8);
+call insertar_material('sillones', 10, 8);
+call insertar_material('escritorios', 25, 8);
+call insertar_material('vitrinas', 12, 8);
+call insertar_material('cajas registradoras', 8, 8);
+call insertar_material('sillas de espera', 10, 8);
+call insertar_material('archivadores', 15, 8);
+call insertar_material('bancos', 18, 8);
+call insertar_material('carteles', 25, 8);
+call insertar_material('luces de techo', 30, 8);
+call insertar_material('alfombras', 20, 8);
+call insertar_material('sistemas de seguridad', 15, 8);
+call insertar_material('mostradores de exhibición', 12, 8);
+
+
+
+select * from Materiales;
+select * from Provedores;
+select * from Tipo_provedores;
+
+-- Me faltan 3 store Procedure los subo para manana antes de las 7am
 -- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
+-- 7 triggers
+-- 8 funciones
