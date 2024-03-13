@@ -11,15 +11,13 @@ create table if not exists Clientes(
     ID_Tipocliente int,
 	foreign key (ID_Tipocliente) references Tipo_cliente(ID_Tipocliente),
     Nombre varchar(50),
-    Telefono int 
+    Telefono varchar(50)
     );
     
 create table if not exists Rol(
 	ID_Rol int primary key auto_increment,
     Nombre varchar (50)
     );
-
-show TABLES;
 
 create table if not exists Sueldos(
 	ID_Sueldos int primary key auto_increment,
@@ -103,24 +101,25 @@ create table if not exists Platillos(
 		foreign key (ID_Personal) references Personal(ID_Personal),
 		foreign key (ID_Platillo) references Platillos(ID_Platillo)
         );
+        
 show tables;
 
-create role Administrador;
-grant all privileges on chinatown.* to Administrador;
+-- create role Administrador;
+-- grant all privileges on chinatown.* to Administrador;
 
-create role Auditor;
-grant create ,update ,select on chinatown.* to Auditor;
+-- create role Auditor;
+-- grant create ,update ,select on chinatown.* to Auditor;
 
-create role Empleado;
-grant create , update , select on chinatown.* to Empleado;
-revoke create ,update , drop on chinatown.personal from Empleados;
+-- create role Empleado;
+-- grant create , update , select on chinatown.* to Empleado;
+-- revoke create ,update , drop on chinatown.personal from Empleados;
+
 
 -- Roles del personal
 CREATE VIEW Roles_Personal AS
 SELECT p.nombre, p.apellido, r.nombre AS rol
 FROM Personal p
-JOIN Rol r ON p.ID_Rol = r.ID_Rol
-JOIN Sueldos s ON s.ID_Rol = s.ID_Rol;
+JOIN Rol r ON p.ID_Rol = r.ID_Rol;
 
 -- Platillos por categoria
 CREATE VIEW Categorias_Platillos AS
@@ -149,22 +148,25 @@ FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
 
--- Inventario Bajo Materiales
-CREATE VIEW Inventario_Bajo_Materiales AS
-SELECT m.nombre AS materiales, m.stock AS materiales_stock
-FROM Materiales m
-JOIN Provedores p ON m.ID_Provedor = p.ID_Provedor
-WHERE m.Stock < 10;
 
--- Inventario Bajo Ingredientes
-CREATE VIEW Inventario_Bajo_Ingredientes AS
-SELECT i.nombre AS ingredientes, i.stock AS ingredientes_stock
-FROM Ingredientes i
-JOIN Provedores p ON i.ID_Provedor = p.ID_Provedor
-WHERE i.Stock < 10;
+-- Rol
+DELIMITER //
+create procedure Insertar_Roles(
+    in r_Nombre varchar(50)
+)
+begin
+	insert into Rol(Nombre)
+	values(r_Nombre);
+end//
+DELIMITER ;
 
--- Store Procedure
+call Insertar_Roles("Administrador");
+call Insertar_Roles("Cocinero");
+call Insertar_Roles("Mesero");
+call Insertar_Roles("Ayudante de cocina");
+call Insertar_Roles("Lider de meseros");
 
+-- personal
 DELIMITER //
 create procedure Insertar_Personal(
     in p_Nombre varchar(50),
@@ -180,7 +182,75 @@ end//
 DELIMITER ;
 
 call Insertar_Personal("Marcos","Lopez",6643470809,now(),1);
-  
+call Insertar_Personal("Akira","Navarro",6643470810,now(),2);
+call insertar_personal('Ana', 'Garcia', 6654398123, now(),2);
+call insertar_personal('Juan', 'Martinez', 6675543210, now(),2);
+call insertar_personal('Maria', 'Rodriguez', 6687654321, now(),3);
+call insertar_personal('Carlos', 'Sanchez', 6698765432, now(),3);
+call insertar_personal('Laura', 'Perez', 6609876543, now(),3);
+call insertar_personal('Pedro', 'Gonzalez', 6610987654, now(),3);
+call insertar_personal('Sofia', 'Diaz', 6621098765, now(),4);
+call insertar_personal('Alejandro', 'Lopez', 6632109876, now(),4);
+call insertar_personal('Elena', 'Hernandez', 6643210987, now(),4);
+call insertar_personal('Aaron', 'Arteaga', 6648041046, now(),5);
 
+-- Tipo cliente
+DELIMITER //
+create procedure Insertar_Tipo_Cliente(
+    in tc_Nombre varchar(50))
+begin
+    insert into Tipo_cliente (Nombre)
+    values(tc_Nombre);
+    
+end//
+DELIMITER ;
 
+call Insertar_Tipo_Cliente("Para llevar");
+call Insertar_Tipo_Cliente("Para Comer Aqui");
 
+-- Cliente 
+describe Clientes;
+DELIMITER //
+create procedure Insertar_Clientes(
+    in C_ID_Tipocliente int,
+    in C_Nombre varchar(50),
+    in C_Telefono varchar(50) 
+)
+begin
+    insert into Clientes (ID_Tipocliente,Nombre,Telefono)
+    values(C_ID_Tipocliente,C_Nombre,C_Telefono);
+    
+end//
+DELIMITER ;
+
+call Insertar_Clientes(1,"Jorge Torres",6643211029);
+call insertar_clientes(1, 'Taro Sato', 1234567890);
+call insertar_clientes(2, 'Yumi Suzuki', 2345678901);
+call insertar_clientes(1, 'Jiro Takahashi', 3456789012);
+call insertar_clientes(2, 'Mika Tanaka', 4567890123);
+call insertar_clientes(1, 'Kazuo Ito', 5678901234);
+call insertar_clientes(2, 'Sayuri Yamamoto', 6789012345);
+call insertar_clientes(1, 'Shuichi Watanabe', 7890123456);
+call insertar_clientes(2, 'Yuko Nakamura', 8901234567);
+call insertar_clientes(1, 'Akiko Kobayashi', 9012345678);
+call insertar_clientes(2, 'Takashi Kato', 9123456789);
+
+Delimiter //
+create procedure Insertar_sueldos(
+	in S_ID_Rol int ,
+	in S_Sueldo float 
+)
+begin
+	insert into Sueldos (ID_Rol,Sueldo)
+    values(S_ID_Rol,S_Sueldo);
+end //
+Delimiter ;
+
+Call Insertar_sueldos(1,4200);
+Call Insertar_sueldos(2,4000);
+Call Insertar_sueldos(3,1800);
+Call Insertar_sueldos(4,2600);
+Call Insertar_sueldos(5,2500);
+
+-- Me faltan 8 store Procedure los subo para manana antes de las 7am
+-- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
