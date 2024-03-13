@@ -325,11 +325,11 @@ call insertar_material('carne de buey', 36, 5);
 call insertar_material('col china', 50, 2);
 call insertar_material('brócoli chino', 50, 2);
 call insertar_material('judías verdes chinas', 50, 2);
-call insertar_material('pimiento chino', 50, 2);
-call insertar_material('berenjena china', 50, 2);
-call insertar_material('calabacín chino', 50, 2);
+call insertar_material('pimiento chino', 50, 9);
+call insertar_material('berenjena china', 50, 9);
+call insertar_material('calabacín chino', 50, 9);
 call insertar_material('nabo chino', 50, 2);
-call insertar_material('repollo chino', 50, 2);
+call insertar_material('repollo chino', 50, 9);
 call insertar_material('espárragos chinos', 50, 2);
 call insertar_material('col rizada china', 50, 2);
 call insertar_material('zanahoria', 50, 2);
@@ -337,10 +337,10 @@ call insertar_material('cebolla', 50, 2);
 call insertar_material('pimiento', 50, 2);
 call insertar_material('tomate', 50, 2);
 call insertar_material('espinacas', 50, 2);
-call insertar_material('calabacín', 50, 2);
-call insertar_material('pepino', 50, 2);
-call insertar_material('patata', 50, 2);
-call insertar_material('calabaza', 50, 2);
+call insertar_material('calabacín', 50, 9);
+call insertar_material('pepino', 50, 9);
+call insertar_material('patata', 50, 9);
+call insertar_material('calabaza', 50, 9);
 call insertar_material('berenjena', 50, 2);
 -- Lacteos
 call insertar_material('queso', 10, 3);
@@ -376,37 +376,45 @@ call insertar_material('papel absorbente', 1, 7);
 call insertar_material('tapadera para freír', 2, 7);
 call insertar_material('aceite para freír', 3, 7);
 call insertar_material('termómetro para aceite', 2, 7);
-call insertar_material('plato escurridor', 1, 7);
-call insertar_material('pinzas de cocina', 3, 7);
+call insertar_material('plato escurridor', 1, 10);
+call insertar_material('pinzas de cocina', 3, 10);
 call insertar_material('pala para freír', 2, 7);
-call insertar_material('bandeja para escurrir', 1, 7);
+call insertar_material('bandeja para escurrir', 1, 10);
 call insertar_material('papel pergamino', 1, 7);
 call insertar_material('soporte para cucharas', 2, 7);
-call insertar_material('guantes resistentes al calor', 3, 7);
+call insertar_material('guantes resistentes al calor', 3, 10);
 -- Muebles de local
 call insertar_material('mesas', 30, 8);
 call insertar_material('mostradores', 15, 8);
-call insertar_material('estantes', 20, 8);
-call insertar_material('sillones', 10, 8);
+call insertar_material('estantes', 20,11);
+call insertar_material('sillones', 10,11);
 call insertar_material('escritorios', 25, 8);
-call insertar_material('vitrinas', 12, 8);
+call insertar_material('vitrinas', 12, 11);
 call insertar_material('cajas registradoras', 8, 8);
-call insertar_material('sillas de espera', 10, 8);
-call insertar_material('archivadores', 15, 8);
+call insertar_material('sillas de espera', 10, 11);
+call insertar_material('archivadores', 15, 11);
 call insertar_material('bancos', 18, 8);
 call insertar_material('carteles', 25, 8);
 call insertar_material('luces de techo', 30, 8);
 call insertar_material('alfombras', 20, 8);
 call insertar_material('sistemas de seguridad', 15, 8);
 call insertar_material('mostradores de exhibición', 12, 8);
-
-
+-- servivio al cliente
+call Insertar_material("servilletas",300,16);
+call Insertar_material('platos', 200, 16);
+call Insertar_material('vasos', 150, 16);
+call Insertar_material('cucharas', 500, 16);
+call Insertar_material('tenedores', 400, 16);
+call Insertar_material('tazas', 100, 16);
+call Insertar_material('servilletas', 300, 16);
+call Insertar_material('mantelería', 50, 16);
+call Insertar_material('bandejas', 80, 16);
+call Insertar_material('copas', 120, 16);
+call Insertar_material('cuchillos', 350, 16);
 
 select * from Materiales;
 select * from Provedores;
 select * from Tipo_provedores;
 
--- Me faltan 3 store Procedure los subo para manana antes de las 7am
+-- Me faltan 8 store Procedure los subo para manana antes de las 7am
 -- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
--- 7 triggers
--- 8 funciones
