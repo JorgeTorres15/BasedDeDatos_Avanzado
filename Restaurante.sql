@@ -442,11 +442,15 @@ Delimiter ;
 -- CALL Insertar_platillo('Tofu mapo', 'Tofu suave y picante con carne de cerdo en una salsa de frijol picante.', 9.75, 1, 11);
 
 
--- Aqui empesemos con los 5 triggers
+-- Aqui empesemos con los 5 triggers:
+--1 Caducidad
+--2 stock
+--3 Empleados antiguos 
+--4 mensajes o no se tu 
 
 --Aqui empecemos con las funciones unas 5 
 
 -- Vistas hacer vistas referentes a
--- los platillos 
--- Empleados
--- provedores con where 
+-- 1 los platillos 
+-- 2 Empleados
+-- 3 provedores con where 
