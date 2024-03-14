@@ -312,7 +312,7 @@ GROUP BY pl.nombre;
 
 -- Actualiza Stock
 DELIMITER //
-CREATE TRIGGER ActualizarStock AFTER INSERT ON Pedidos
+CREATE TRIGGER ActualizarStock AFTER UPDATE ON Pedidos
 FOR EACH ROW
 BEGIN
     UPDATE Ingredientes
