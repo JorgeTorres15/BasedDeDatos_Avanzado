@@ -448,6 +448,37 @@ Delimiter ;
 --3 Empleados antiguos 
 --4 mensajes o no se tu 
 
+-- Actualiza Stock
+DELIMITER //
+CREATE TRIGGER ActualizarStock AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    UPDATE Ingredientes
+    SET Stock = Stock - 1
+    WHERE ID_Ingredientes IN (SELECT ID_Ingredientes FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
+END//
+DELIMITER ;
+
+-- Alerta Stock Bajo
+DELIMITER //
+CREATE TRIGGER ChecaStock AFTER UPDATE ON Ingredientes
+FOR EACH ROW
+BEGIN
+  IF NEW.stock < 10 THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El stock de un ingrediente esta por debajo de 10 unidades.';
+  END IF;
+END//
+DELIMITER //
+
+-- Calcular Total de Pedido
+DELIMITER //
+CREATE TRIGGER CalcularTotal BEFORE INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    SET NEW.Total = (SELECT Precio FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
+END//
+DELIMITER ;
+
 --Aqui empecemos con las funciones unas 5 
 
 -- Vistas hacer vistas referentes a
