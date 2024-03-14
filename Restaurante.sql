@@ -162,11 +162,11 @@ begin
 end//
 DELIMITER ;
 
-call Insertar_Roles("Administrador");
-call Insertar_Roles("Cocinero");
-call Insertar_Roles("Mesero");
-call Insertar_Roles("Ayudante de cocina");
-call Insertar_Roles("Lider de meseros");
+-- call Insertar_Roles("Administrador");
+-- call Insertar_Roles("Cocinero");
+-- call Insertar_Roles("Mesero");
+-- call Insertar_Roles("Ayudante de cocina");
+-- call Insertar_Roles("Lider de meseros");
 
 -- personal
 DELIMITER //
@@ -183,18 +183,18 @@ begin
 end//
 DELIMITER ;
 
-call Insertar_Personal("Marcos","Lopez",6643470809,now(),1);
-call Insertar_Personal("Akira","Navarro",6643470810,now(),2);
-call insertar_personal('Ana', 'Garcia', 6654398123, now(),2);
-call insertar_personal('Juan', 'Martinez', 6675543210, now(),2);
-call insertar_personal('Maria', 'Rodriguez', 6687654321, now(),3);
-call insertar_personal('Carlos', 'Sanchez', 6698765432, now(),3);
-call insertar_personal('Laura', 'Perez', 6609876543, now(),3);
-call insertar_personal('Pedro', 'Gonzalez', 6610987654, now(),3);
-call insertar_personal('Sofia', 'Diaz', 6621098765, now(),4);
-call insertar_personal('Alejandro', 'Lopez', 6632109876, now(),4);
-call insertar_personal('Elena', 'Hernandez', 6643210987, now(),4);
-call insertar_personal('Aaron', 'Arteaga', 6648041046, now(),5);
+-- call Insertar_Personal("Marcos","Lopez",6643470809,now(),1);
+-- call Insertar_Personal("Akira","Navarro",6643470810,now(),2);
+-- call insertar_personal('Ana', 'Garcia', 6654398123, now(),2);
+-- call insertar_personal('Juan', 'Martinez', 6675543210, now(),2);
+-- call insertar_personal('Maria', 'Rodriguez', 6687654321, now(),3);
+-- call insertar_personal('Carlos', 'Sanchez', 6698765432, now(),3);
+-- call insertar_personal('Laura', 'Perez', 6609876543, now(),3);
+-- call insertar_personal('Pedro', 'Gonzalez', 6610987654, now(),3);
+-- call insertar_personal('Sofia', 'Diaz', 6621098765, now(),4);
+-- call insertar_personal('Alejandro', 'Lopez', 6632109876, now(),4);
+-- call insertar_personal('Elena', 'Hernandez', 6643210987, now(),4);
+-- call insertar_personal('Aaron', 'Arteaga', 6648041046, now(),5);
 
 -- Tipo cliente
 DELIMITER //
@@ -207,8 +207,8 @@ begin
 end//
 DELIMITER ;
 
-call Insertar_Tipo_Cliente("Para llevar");
-call Insertar_Tipo_Cliente("Para Comer Aqui");
+-- call Insertar_Tipo_Cliente("Para llevar");
+-- call Insertar_Tipo_Cliente("Para Comer Aqui");
 
 -- Cliente 
 describe Clientes;
@@ -225,17 +225,17 @@ begin
 end//
 DELIMITER ;
 
-call Insertar_Clientes(1,"Jorge Torres",6643211029);
-call insertar_clientes(1, 'Taro Sato', 1234567890);
-call insertar_clientes(2, 'Yumi Suzuki', 2345678901);
-call insertar_clientes(1, 'Jiro Takahashi', 3456789012);
-call insertar_clientes(2, 'Mika Tanaka', 4567890123);
-call insertar_clientes(1, 'Kazuo Ito', 5678901234);
-call insertar_clientes(2, 'Sayuri Yamamoto', 6789012345);
-call insertar_clientes(1, 'Shuichi Watanabe', 7890123456);
-call insertar_clientes(2, 'Yuko Nakamura', 8901234567);
-call insertar_clientes(1, 'Akiko Kobayashi', 9012345678);
-call insertar_clientes(2, 'Takashi Kato', 9123456789);
+-- call Insertar_Clientes(1,"Jorge Torres",6643211029);
+-- call insertar_clientes(1, 'Taro Sato', 1234567890);
+-- call insertar_clientes(2, 'Yumi Suzuki', 2345678901);
+-- call insertar_clientes(1, 'Jiro Takahashi', 3456789012);
+-- call insertar_clientes(2, 'Mika Tanaka', 4567890123);
+-- call insertar_clientes(1, 'Kazuo Ito', 5678901234);
+-- call insertar_clientes(2, 'Sayuri Yamamoto', 6789012345);
+-- call insertar_clientes(1, 'Shuichi Watanabe', 7890123456);
+-- call insertar_clientes(2, 'Yuko Nakamura', 8901234567);
+-- call insertar_clientes(1, 'Akiko Kobayashi', 9012345678);
+-- call insertar_clientes(2, 'Takashi Kato', 9123456789);
 
 Delimiter //
 create procedure Insertar_sueldos(
@@ -248,11 +248,11 @@ begin
 end //
 Delimiter ;
 
-Call Insertar_sueldos(1,4200);
-Call Insertar_sueldos(2,4000);
-Call Insertar_sueldos(3,1800);
-Call Insertar_sueldos(4,2600);
-Call Insertar_sueldos(5,2500);
+-- Call Insertar_sueldos(1,4200);
+-- Call Insertar_sueldos(2,4000);
+-- Call Insertar_sueldos(3,1800);
+-- Call Insertar_sueldos(4,2600);
+-- Call Insertar_sueldos(5,2500);
 
 -- Tipo Provedores
 Delimiter //
@@ -265,13 +265,13 @@ begin
 end//Insertar_Tipo_Provedores
 Delimiter ;
 
-call Insertar_Tipo_Provedores("Servicio al Cliente");
-call Insertar_Tipo_Provedores("Verduras");
-call Insertar_Tipo_Provedores("Carnes");
-call Insertar_Tipo_Provedores("Mariscos");
-call Insertar_Tipo_Provedores("Materiales inmuebles");
-call Insertar_Tipo_Provedores("Materiales cosina");
-call Insertar_Tipo_Provedores("Otros");
+-- call Insertar_Tipo_Provedores("Servicio al Cliente");
+-- call Insertar_Tipo_Provedores("Verduras");
+-- call Insertar_Tipo_Provedores("Carnes");
+-- call Insertar_Tipo_Provedores("Mariscos");
+-- call Insertar_Tipo_Provedores("Materiales inmuebles");
+-- call Insertar_Tipo_Provedores("Materiales cosina");
+-- call Insertar_Tipo_Provedores("Otros");
 
 -- Provedores
 Delimiter //
@@ -287,19 +287,19 @@ begin
 end//
 Delimiter //
 
-call Insertar_Provedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
-call insertar_provedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
-call insertar_provedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
-call insertar_provedores("Pescadería Martínez", 4, "6693456789", "ana.martinez@pescaderia.com");
-call insertar_provedores("Cerdos Piggy",3, "6604567890", "carlos.gonzalez@panaderia.com");
-call insertar_provedores("Dulcería Sánchez", 7, "6615678901", "sofia.sanchez@dulceria.com");
-call insertar_provedores("Ferretería Rodríguez", 6, "6626789012", "alejandro.rodriguez@ferreteria.com");
-call insertar_provedores("IKEA", 5, "6648901234", "pablo.diaz@IKEA.com");
-call insertar_provedores("SR.Yamato", 2 , "6659012345", "luisa.martin@takataka.com");
-call insertar_provedores("IKEA", 6, "6660123456", "ana.fernandez@electrodomesticos.com");
-call insertar_provedores("Mueblería Ruiz", 6, "6671234567", "javier.ruiz@muebleria.com");
-call insertar_provedores("Mar profundo", 4, "6615678901", "sofia.herrera@example.com");
-call insertar_provedores("Todo X Comensales", 1, "6643679864", "sofia.herrera@example.com");
+-- call Insertar_Provedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
+-- call insertar_provedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
+-- call insertar_provedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
+-- call insertar_provedores("Pescadería Martínez", 4, "6693456789", "ana.martinez@pescaderia.com");
+-- call insertar_provedores("Cerdos Piggy",3, "6604567890", "carlos.gonzalez@panaderia.com");
+-- call insertar_provedores("Dulcería Sánchez", 7, "6615678901", "sofia.sanchez@dulceria.com");
+-- call insertar_provedores("Ferretería Rodríguez", 6, "6626789012", "alejandro.rodriguez@ferreteria.com");
+-- call insertar_provedores("IKEA", 5, "6648901234", "pablo.diaz@IKEA.com");
+-- call insertar_provedores("SR.Yamato", 2 , "6659012345", "luisa.martin@takataka.com");
+-- call insertar_provedores("IKEA", 6, "6660123456", "ana.fernandez@electrodomesticos.com");
+-- call insertar_provedores("Mueblería Ruiz", 6, "6671234567", "javier.ruiz@muebleria.com");
+-- call insertar_provedores("Mar profundo", 4, "6615678901", "sofia.herrera@example.com");
+-- call insertar_provedores("Todo X Comensales", 1, "6643679864", "sofia.herrera@example.com");
 
 Delimiter //
 create procedure Insertar_Material(
@@ -314,16 +314,16 @@ end//
 Delimiter ;
 
 -- Materiales
-CALL Insertar_Material("Mesa de Banquete", 2, 7);
-CALL Insertar_Material("Silla de Banquete", 2, 7);
-CALL Insertar_Material("Carrito de Servicio", 2, 11);
-CALL Insertar_Material("Mostrador de Bar", 2, 12);
-CALL Insertar_Material("Refrigerador de Bebidas", 2, 12);
-CALL Insertar_Material("Mesa de Banquete", 2, 12);
-CALL Insertar_Material("Silla de Banquete", 2, 11);
-CALL Insertar_Material("Carrito de Servicio", 2, 7);
-CALL Insertar_Material("Mostrador de Bar", 2, 11);
-CALL Insertar_Material("Refrigerador de Bebidas", 2, 11);
+-- CALL Insertar_Material("Mesa de Banquete", 2, 7);
+-- CALL Insertar_Material("Silla de Banquete", 2, 7);
+-- CALL Insertar_Material("Carrito de Servicio", 2, 11);
+-- CALL Insertar_Material("Mostrador de Bar", 2, 12);
+-- CALL Insertar_Material("Refrigerador de Bebidas", 2, 12);
+-- CALL Insertar_Material("Mesa de Banquete", 2, 12);
+-- CALL Insertar_Material("Silla de Banquete", 2, 11);
+-- CALL Insertar_Material("Carrito de Servicio", 2, 7);
+-- CALL Insertar_Material("Mostrador de Bar", 2, 11);
+-- CALL Insertar_Material("Refrigerador de Bebidas", 2, 11);
 
 Delimiter //
 create procedure Insertar_Ingredientes(
@@ -340,65 +340,64 @@ begin
 end//
 Delimiter ;
 
-CALL Insertar_Ingredientes(1, 'pechuga de pollo', NOW(), 30, 'Refrigerado');
-CALL Insertar_Ingredientes(1, 'pierna de cerdo', NOW(), 25, 'Refrigerado');
-CALL Insertar_Ingredientes(1, 'carne de res', NOW(), 28, 'Refrigerado');
-CALL Insertar_Ingredientes(5, 'carne de pato', NOW(), 35, 'Refrigerado');
-CALL Insertar_Ingredientes(5, 'camarones', NOW(), 40, 'Refrigerado');
-CALL Insertar_Ingredientes(1, 'ternera', NOW(), 32, 'Refrigerado');
-CALL Insertar_Ingredientes(1, 'pato', NOW(), 37, 'Refrigerado');
-CALL Insertar_Ingredientes(5, 'cerdo', NOW(), 29, 'Refrigerado');
-CALL Insertar_Ingredientes(5, 'carne de cordero', NOW(), 33, 'Refrigerado');
-CALL Insertar_Ingredientes(5, 'carne de buey', NOW(), 36, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'col china', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'brócoli chino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'judías verdes chinas', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'pimiento chino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'berenjena china', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'calabacín chino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'nabo chino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'repollo chino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'espárragos chinos', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'col rizada china', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'zanahoria', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'cebolla', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'pimiento', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'tomate', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'espinacas', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'calabacín', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'pepino', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'patata', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(9, 'calabaza', NOW(), 50, 'Refrigerado');
-CALL Insertar_Ingredientes(2, 'berenjena', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(1, 'pechuga de pollo', NOW(), 30, 'Refrigerado');
+-- CALL Insertar_Ingredientes(1, 'pierna de cerdo', NOW(), 25, 'Refrigerado');
+-- CALL Insertar_Ingredientes(1, 'carne de res', NOW(), 28, 'Refrigerado');
+-- CALL Insertar_Ingredientes(5, 'carne de pato', NOW(), 35, 'Refrigerado');
+-- CALL Insertar_Ingredientes(5, 'camarones', NOW(), 40, 'Refrigerado');
+-- CALL Insertar_Ingredientes(1, 'ternera', NOW(), 32, 'Refrigerado');
+-- CALL Insertar_Ingredientes(1, 'pato', NOW(), 37, 'Refrigerado');
+-- CALL Insertar_Ingredientes(5, 'cerdo', NOW(), 29, 'Refrigerado');
+-- CALL Insertar_Ingredientes(5, 'carne de cordero', NOW(), 33, 'Refrigerado');
+-- CALL Insertar_Ingredientes(5, 'carne de buey', NOW(), 36, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'col china', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'brócoli chino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'judías verdes chinas', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'pimiento chino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'berenjena china', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'calabacín chino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'nabo chino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'repollo chino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'espárragos chinos', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'col rizada china', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'zanahoria', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'cebolla', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'pimiento', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'tomate', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'espinacas', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'calabacín', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'pepino', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'patata', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(9, 'calabaza', NOW(), 50, 'Refrigerado');
+-- CALL Insertar_Ingredientes(2, 'berenjena', NOW(), 50, 'Refrigerado');
 -- Lácteos
-CALL Insertar_Ingredientes(3, 'queso', NOW(), 10, 'Refrigerado');
-CALL Insertar_Ingredientes(3, 'yogur', NOW(), 15, 'Refrigerado');
-CALL Insertar_Ingredientes(3, 'crema', NOW(), 8, 'Refrigerado');
-CALL Insertar_Ingredientes(3, 'mantequilla', NOW(), 7, 'Refrigerado');
-CALL Insertar_Ingredientes(3, 'helado', NOW(), 20, 'Refrigerado');
+-- CALL Insertar_Ingredientes(3, 'queso', NOW(), 10, 'Refrigerado');
+-- CALL Insertar_Ingredientes(3, 'yogur', NOW(), 15, 'Refrigerado');
+-- CALL Insertar_Ingredientes(3, 'crema', NOW(), 8, 'Refrigerado');
+-- CALL Insertar_Ingredientes(3, 'mantequilla', NOW(), 7, 'Refrigerado');
+-- CALL Insertar_Ingredientes(3, 'helado', NOW(), 20, 'Refrigerado');
 -- Pescadería
-CALL Insertar_Ingredientes(4, 'camarones', NOW(), 20, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'calamares', NOW(), 15, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'pulpo', NOW(), 18, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'langostinos', NOW(), 12, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'almejas', NOW(), 10, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'salmón', NOW(), 22, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'atún', NOW(), 25, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'bacalao', NOW(), 17, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'ostras', NOW(), 8, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'trucha', NOW(), 14, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'mejillones', NOW(), 11, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'vieiras', NOW(), 13, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'tilapia', NOW(), 16, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'rape', NOW(), 19, 'Refrigerado');
-CALL Insertar_Ingredientes(4, 'anguila', NOW(), 21, 'Refrigerado');
-CALL Insertar_Ingredientes(12, 'cangrejo', NOW(), 23, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'camarones', NOW(), 20, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'calamares', NOW(), 15, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'pulpo', NOW(), 18, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'langostinos', NOW(), 12, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'almejas', NOW(), 10, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'salmón', NOW(), 22, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'atún', NOW(), 25, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'bacalao', NOW(), 17, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'ostras', NOW(), 8, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'trucha', NOW(), 14, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'mejillones', NOW(), 11, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'vieiras', NOW(), 13, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'tilapia', NOW(), 16, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'rape', NOW(), 19, 'Refrigerado');
+-- CALL Insertar_Ingredientes(4, 'anguila', NOW(), 21, 'Refrigerado');
+-- CALL Insertar_Ingredientes(12, 'cangrejo', NOW(), 23, 'Refrigerado');
 -- Dulcería
-CALL Insertar_Ingredientes(6, 'helado', NOW(), 5, 'Refrigerado');
-CALL Insertar_Ingredientes(6, 'galletas', NOW(), 200, 'Refrigerado');
+-- CALL Insertar_Ingredientes(6, 'helado', NOW(), 5, 'Refrigerado');
+-- CALL Insertar_Ingredientes(6, 'galletas', NOW(), 200, 'Refrigerado');
 
-
-describe Categorias;
+-- Categorias
 Delimiter //
 create procedure Insertar_Categorias(
 	in Cat_Nombre varchar(50)
@@ -410,12 +409,44 @@ begin
 end //
 Delimiter ;
 
-call Insertar_Categorias("Normal");
-call Insertar_Categorias("Frio");
-call Insertar_Categorias("Especial");
+-- call Insertar_Categorias("Normal");
+-- call Insertar_Categorias("Frio");
+-- call Insertar_Categorias("Especial");
 
-describe Platillos;
-describe Pedidos;
+describe pedidos;
 
--- Me faltan 3 store Procedure los subo para manana antes de las 7am
--- comente por ahora los roles se me hace que se cual es el problema es por que quito permisos lo hare de la forma larga
+Delimiter //
+create procedure Insertar_platillo(
+	in pla_Nombre varchar(50),
+    in pla_Descripcion varchar(50),
+    in pla_Precio float,
+    in pla_ID_Categoria int,
+	in pla_ID_Ingredientes int
+)
+begin
+	insert into platillos (Nombre,Descripcion,Precio,ID_Categoria,ID_Ingredientes)
+    values (pla_Descripcion,pla_Precio,pla_ID_Categoria, pla_ID_Ingredientes);
+end//
+Delimiter ;
+
+-- CALL Insertar_platillo('Pollo agridulce', 'Delicioso pollo agridulce con trozos de pimiento y piña.', 9.99, 1, 1);
+-- CALL Insertar_platillo('Arroz frito', 'Arroz salteado con vegetales, huevo y trozos de carne.', 8.50, 1, 2);
+-- CALL Insertar_platillo('Rollitos de primavera', 'Rollos crujientes rellenos de vegetales y carne.', 7.25, 1, 3);
+-- CALL Insertar_platillo('Chow mein de pollo', 'Fideos fritos con pollo, verduras y salsa de soja.', 10.75, 1, 4);
+-- CALL Insertar_platillo('Wantán frito', 'Dumplings rellenos de carne de cerdo, fritos hasta que estén crujientes.', 6.99, 1, 5);
+-- CALL Insertar_platillo('Cerdo a la naranja', 'Trozos de cerdo salteados en salsa de naranja con vegetales.', 12.50, 1, 6);
+-- CALL Insertar_platillo('Camarones al estilo cantonés', 'Camarones frescos salteados con vegetales en salsa de ostras.', 13.99, 1, 7);
+-- CALL Insertar_platillo('Ternera con brócoli', 'Ternera tierna y brócoli en una salsa de ajo y jengibre.', 11.25, 1, 8);
+-- CALL Insertar_platillo('Sopa de wonton', 'Caldo de pollo con wontons rellenos de cerdo y camarones.', 5.50, 1, 9);
+-- CALL Insertar_platillo('Pato laqueado', 'Pato crujiente con piel dorada servido con salsa hoisin y crepes.', 15.99, 1, 10);
+-- CALL Insertar_platillo('Tofu mapo', 'Tofu suave y picante con carne de cerdo en una salsa de frijol picante.', 9.75, 1, 11);
+
+
+-- Aqui empesemos con los 5 triggers
+
+--Aqui empecemos con las funciones unas 5 
+
+-- Vistas hacer vistas referentes a
+-- los platillos 
+-- Empleados
+-- provedores con where 
