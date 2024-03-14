@@ -459,17 +459,6 @@ BEGIN
 END//
 DELIMITER ;
 
--- Alerta Stock Bajo
-DELIMITER //
-CREATE TRIGGER ChecaStock AFTER UPDATE ON Ingredientes
-FOR EACH ROW
-BEGIN
-  IF NEW.stock < 10 THEN
-    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El stock de un ingrediente esta por debajo de 10 unidades.';
-  END IF;
-END//
-DELIMITER //
-
 -- Calcular Total de Pedido
 DELIMITER //
 CREATE TRIGGER CalcularTotal BEFORE INSERT ON Pedidos
@@ -478,6 +467,18 @@ BEGIN
     SET NEW.Total = (SELECT Precio FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
 END//
 DELIMITER ;
+
+-- Stock de un producto llega a cero
+DELIMITER //
+CREATE TRIGGER notificar AFTER UPDATE ON Ingredientes
+FOR EACH ROW
+BEGIN
+    IF NEW.Stock = 0 THEN
+        SIGNAL sqlstate '45000'
+        SET message_text = 'El stock del producto ha llegado a cero.';
+    END IF;
+END//
+DELIMITER //
 
 --Aqui empecemos con las funciones unas 5 
 
