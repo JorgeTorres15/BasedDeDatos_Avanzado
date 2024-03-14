@@ -544,14 +544,31 @@ DELIMITER ;
 
 -- Pedidos Por Cliente
 DELIMITER //
-
 CREATE FUNCTION ContarPedidosPorCliente(ID_Cliente INT) RETURNS INT
 BEGIN
     DECLARE totalPedidos INT;
-    
     SELECT COUNT(*) INTO totalPedidos FROM Pedidos WHERE ID_Cliente = ID_Cliente;
-    
     RETURN totalPedidos;
+END //
+DELIMITER ;
+
+-- Ventas Por Mes
+DELIMITER //
+CREATE FUNCTION CalcularTotalVentasPorMes(mes INT) RETURNS FLOAT
+BEGIN
+    DECLARE totalVentas FLOAT;
+    SELECT SUM(Total) INTO totalVentas FROM Pedidos WHERE MONTH(Fecha) = mes;
+    RETURN totalVentas;
+END //
+DELIMITER ;
+
+-- Platillos Por Categoria
+DELIMITER //
+CREATE FUNCTION PlatillosPorCategoria(ID_Categoria INT) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE platillosLista VARCHAR(255);
+    SELECT GROUP_CONCAT(Nombre) INTO platillosLista FROM Platillos WHERE ID_Categoria = ID_Categoria;
+    RETURN platillosLista;
 END //
 DELIMITER ;
 
