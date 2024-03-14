@@ -465,12 +465,14 @@ BEGIN
 END//
 DELIMITER ;
 
--- Calcular Total de Pedido
+-- Cambio de Personal
 DELIMITER //
-CREATE TRIGGER CalcularTotal BEFORE INSERT ON Pedidos
+CREATE TRIGGER RegistrarCambioPersonal
+AFTER UPDATE ON Personal
 FOR EACH ROW
 BEGIN
-    SET NEW.Total = (SELECT Precio FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
+    INSERT INTO Pesonal_Bitacora (ID_Anterior, Nombre, Fecha_renuncia)
+    VALUES (OLD.ID_Personal, CONCAT(OLD.Nombre, ' ', OLD.Apellido), NOW());
 END//
 DELIMITER ;
 
@@ -519,6 +521,39 @@ END;
 DELIMITER ;
 
 --Aqui empecemos con las funciones unas 5 
+
+-- Calcular Total de Pedido
+DELIMITER //
+CREATE FUNCTION CalcularTotalPedido(ID_Platillo INT) RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE precioPlatillo FLOAT;
+    SELECT Precio INTO precioPlatillo FROM Platillos WHERE ID_Platillo = ID_Platillo;
+    RETURN precioPlatillo;
+END //
+DELIMITER ;
+
+-- Marcar Pedido Como Entregado
+DELIMITER //
+CREATE FUNCTION MarcarPedidoEntregado(ID_Pedido INT) RETURNS VARCHAR(50)
+BEGIN
+    UPDATE Pedidos SET Entregado = 'Sí' WHERE ID_Pedido = ID_Pedido;
+    RETURN 'Pedido marcado como entregado';
+END //
+DELIMITER ;
+
+-- Pedidos Por Cliente
+DELIMITER //
+
+CREATE FUNCTION ContarPedidosPorCliente(ID_Cliente INT) RETURNS INT
+BEGIN
+    DECLARE totalPedidos INT;
+    
+    SELECT COUNT(*) INTO totalPedidos FROM Pedidos WHERE ID_Cliente = ID_Cliente;
+    
+    RETURN totalPedidos;
+END //
+DELIMITER ;
 
 -- Vistas hacer vistas referentes a
 -- 1 los platillos 
