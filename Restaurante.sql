@@ -354,7 +354,7 @@ BEGIN
 END//
 DELIMITER //
 
--- Telefono de provedor con stock bajo
+-- Telefono de proveedor con stock bajo
 DELIMITER //
 CREATE TRIGGER telefono AFTER UPDATE ON Ingredientes
 FOR EACH ROW
@@ -374,61 +374,6 @@ BEGIN
     END IF;
 END;
 //
-DELIMITER ;
-
--- Calcular Total de Pedido
-DELIMITER //
-CREATE FUNCTION CalcularTotalPedido(ID_Platillo INT) RETURNS FLOAT
-DETERMINISTIC
-BEGIN
-    DECLARE precioPlatillo FLOAT;
-    SELECT Precio INTO precioPlatillo FROM Platillos WHERE ID_Platillo = ID_Platillo;
-    RETURN precioPlatillo;
-END //
-DELIMITER ;
-
--- Marcar Pedido Como Entregado
-DELIMITER //
-CREATE FUNCTION MarcarPedidoEntregado(ID_Pedido INT) RETURNS VARCHAR(50)
-DETERMINISTIC
-BEGIN
-    UPDATE Pedidos SET Entregado = 'Sí' WHERE ID_Pedido = ID_Pedido;
-    RETURN 'Pedido marcado como entregado';
-END //
-DELIMITER ;
-
--- Pedidos Por Cliente
-DELIMITER //
-
-CREATE FUNCTION ContarPedidosPorCliente(ID_Cliente INT) RETURNS INT
-DETERMINISTIC
-BEGIN
-    DECLARE totalPedidos INT;
-    SELECT COUNT(*) INTO totalPedidos FROM Pedidos WHERE ID_Cliente = ID_Cliente;
-    RETURN totalPedidos;
-END //
-DELIMITER ;
-
--- Ventas Por Mes
-DELIMITER //
-CREATE FUNCTION CalcularTotalVentasPorMes(mes INT) RETURNS FLOAT
-DETERMINISTIC
-BEGIN
-    DECLARE totalVentas FLOAT;
-    SELECT SUM(Total) INTO totalVentas FROM Pedidos WHERE MONTH(Fecha) = mes;
-    RETURN totalVentas;
-END //
-DELIMITER ;
-
--- Platillos Por Categoria
-DELIMITER //
-CREATE FUNCTION PlatillosPorCategoria(ID_Categoria INT) RETURNS VARCHAR(255)
-DETERMINISTIC
-BEGIN
-    DECLARE platillosLista VARCHAR(255);
-    SELECT GROUP_CONCAT(Nombre) INTO platillosLista FROM Platillos WHERE ID_Categoria = ID_Categoria;
-    RETURN platillosLista;
-END //
 DELIMITER ;
 
 -- Auditoria Update Ingredientes
@@ -494,6 +439,61 @@ FOR EACH ROW
 BEGIN
     INSERT INTO AuditoriaOperaciones(TipoOperacion, NombreTabla, Detalles, FechaOperacion)
     VALUES ('DELETE', 'Materiales', CONCAT('ID_Material: ', OLD.ID_Material, '; Nombre: ', OLD.Nombre, '; Stock: ', OLD.Stock), NOW());
+END //
+DELIMITER ;
+
+-- Calcular Total de Pedido
+DELIMITER //
+CREATE FUNCTION CalcularTotalPedido(ID_Platillo INT) RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE precioPlatillo FLOAT;
+    SELECT Precio INTO precioPlatillo FROM Platillos WHERE ID_Platillo = ID_Platillo;
+    RETURN precioPlatillo;
+END //
+DELIMITER ;
+
+-- Marcar Pedido Como Entregado
+DELIMITER //
+CREATE FUNCTION MarcarPedidoEntregado(ID_Pedido INT) RETURNS VARCHAR(50)
+DETERMINISTIC
+BEGIN
+    UPDATE Pedidos SET Entregado = 'Sí' WHERE ID_Pedido = ID_Pedido;
+    RETURN 'Pedido marcado como entregado';
+END //
+DELIMITER ;
+
+-- Pedidos Por Cliente
+DELIMITER //
+
+CREATE FUNCTION ContarPedidosPorCliente(ID_Cliente INT) RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE totalPedidos INT;
+    SELECT COUNT(*) INTO totalPedidos FROM Pedidos WHERE ID_Cliente = ID_Cliente;
+    RETURN totalPedidos;
+END //
+DELIMITER ;
+
+-- Ventas Por Mes
+DELIMITER //
+CREATE FUNCTION CalcularTotalVentasPorMes(mes INT) RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE totalVentas FLOAT;
+    SELECT SUM(Total) INTO totalVentas FROM Pedidos WHERE MONTH(Fecha) = mes;
+    RETURN totalVentas;
+END //
+DELIMITER ;
+
+-- Platillos Por Categoria
+DELIMITER //
+CREATE FUNCTION PlatillosPorCategoria(ID_Categoria INT) RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+    DECLARE platillosLista VARCHAR(255);
+    SELECT GROUP_CONCAT(Nombre) INTO platillosLista FROM Platillos WHERE ID_Categoria = ID_Categoria;
+    RETURN platillosLista;
 END //
 DELIMITER ;
 
