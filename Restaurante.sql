@@ -103,6 +103,12 @@ create table if not exists Platillos(
 		foreign key (ID_Personal) references Personal(ID_Personal),
 		foreign key (ID_Platillo) references Platillos(ID_Platillo)
         );
+
+create table if not exists Alertas(
+		ID INT AUTO_INCREMENT PRIMARY KEY,
+		Mensaje VARCHAR(255),
+		Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);
         
 drop role if exists Administrador;
 create role Administrador;
@@ -448,6 +454,69 @@ Delimiter ;
 --3 Empleados antiguos 
 --4 mensajes o no se tu 
 
+-- Actualiza Stock
+DELIMITER //
+CREATE TRIGGER ActualizarStock AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    UPDATE Ingredientes
+    SET Stock = Stock - 1
+    WHERE ID_Ingredientes IN (SELECT ID_Ingredientes FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
+END//
+DELIMITER ;
+
+-- Calcular Total de Pedido
+DELIMITER //
+CREATE TRIGGER CalcularTotal BEFORE INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+    SET NEW.Total = (SELECT Precio FROM Platillos WHERE ID_Platillo = NEW.ID_Platillo);
+END//
+DELIMITER ;
+
+-- Stock de un producto llega a cero
+DELIMITER //
+CREATE TRIGGER notificar AFTER UPDATE ON Ingredientes
+FOR EACH ROW
+BEGIN
+    IF NEW.Stock = 0 THEN
+        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente está por debajo de 10 unidades.');
+    END IF;
+END//
+DELIMITER //
+
+-- Alerta Stock Bajo
+DELIMITER //
+CREATE TRIGGER ChecaStock AFTER UPDATE ON Ingredientes
+FOR EACH ROW
+BEGIN
+    IF NEW.stock < 10 THEN
+        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente ha llegado a cero.');
+    END IF;
+END//
+DELIMITER //
+
+-- Telefono de provedor con stock bajo
+DELIMITER //
+CREATE TRIGGER telefono AFTER UPDATE ON Ingredientes
+FOR EACH ROW
+BEGIN
+	DECLARE proveedor_msg VARCHAR(255);
+    DECLARE proveedor_telefono VARCHAR(50);
+    IF NEW.Stock = 0 THEN
+        SELECT telefono INTO proveedor_telefono
+        FROM Provedores
+        WHERE ID_Provedor = (
+            SELECT ID_Provedor
+            FROM Ingredientes
+            WHERE ID_Ingredientes = NEW.ID_Ingredientes
+        );
+        SET proveedor_msg = CONCAT('Llame al proveedor para conseguir mas ingredientes: ', proveedor_telefono);
+        INSERT INTO Alertas (Mensaje) VALUES (proveedor_msg);
+    END IF;
+END;
+//
+DELIMITER ;
 
 --Aqui empecemos con las funciones unas 5 
 
