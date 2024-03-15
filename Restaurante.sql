@@ -43,16 +43,16 @@ create table Pesonal_Bitacora(
     Nombre varchar(50) not null ,
     Fecha_renuncia datetime);
 
-create table if not exists Tipo_Provedores(
-	ID_Tipoprovedores int primary key auto_increment,
+create table if not exists Tipo_proveedores(
+	ID_Tipoproveedores int primary key auto_increment,
     Nombre varchar(50)
     );
     
-create table if not exists Provedores(
-	ID_Provedor int primary key auto_increment,
+create table if not exists proveedores(
+	ID_proveedor int primary key auto_increment,
     Nombre varchar(50) not null,
-    ID_Tipoprovedores int not null,
-    foreign key (ID_Tipoprovedores) references Tipo_Provedores(ID_Tipoprovedores),
+    ID_Tipoproveedores int not null,
+    foreign key (ID_Tipoproveedores) references Tipo_proveedores(ID_Tipoproveedores),
     Telefono varchar(50),
     Correo varchar(50) default "Sin correo"
     );
@@ -61,18 +61,18 @@ create table if not exists Materiales (
 	ID_Material int primary key auto_increment,
     Nombre varchar(50) not null,
     Stock int not null,
-    ID_Provedor int,
-    foreign key (ID_Provedor) references Provedores(ID_Provedor)
+    ID_proveedor int,
+    foreign key (ID_proveedor) references proveedores(ID_proveedor)
     );
 
 create table if not exists Ingredientes(
 	ID_Ingredientes int primary key auto_increment,
-    ID_Provedor int not null,
+    ID_proveedor int not null,
     Nombre varchar(50) not null,
     Fecha_Recepcion datetime not null,
     stock int default 0,
-    Concervacion varchar(50) not null,
-    foreign key (ID_Provedor) references Provedores(ID_Provedor)
+    Conservacion varchar(50) not null,
+    foreign key (ID_proveedor) references proveedores(ID_proveedor)
     );
 
 create table if not exists Categorias(
@@ -231,28 +231,28 @@ begin
 end //
 Delimiter ;
 
--- Insert Tipo Provedores
+-- Insert Tipo proveedores
 Delimiter //
-create procedure Insertar_Tipo_Provedores(
+create procedure Insertar_Tipo_proveedores(
 	in tp_Nombre varchar(50)
 )
 begin
-	insert into Tipo_Provedores(Nombre)
+	insert into Tipo_proveedores(Nombre)
     values (tp_Nombre);
-end//Insertar_Tipo_Provedores
+end//Insertar_Tipo_proveedores
 Delimiter ;
 
--- Insert Provedores
+-- Insert proveedores
 Delimiter //
-create procedure Insertar_Provedores(
+create procedure Insertar_proveedores(
     in P_Nombre varchar(50),
-    in P_ID_Tipoprovedores int,
+    in P_ID_Tipoproveedores int,
     in P_Telefono varchar(50),
     in P_Correo varchar(50)
 )
 begin
-	insert into Provedores(Nombre,ID_Tipoprovedores,Telefono,Correo) 
-    values(P_Nombre,P_ID_Tipoprovedores,P_Telefono,P_Correo);
+	insert into proveedores(Nombre,ID_Tipoproveedores,Telefono,Correo) 
+    values(P_Nombre,P_ID_Tipoproveedores,P_Telefono,P_Correo);
 end//
 Delimiter //
 
@@ -261,11 +261,11 @@ Delimiter //
 create procedure Insertar_Material(
 	in M_Nombre varchar(50),
     in M_Stock int ,
-    in M_ID_Provedor int
+    in M_ID_proveedor int
 )
 begin
-	insert into Materiales(Nombre,Stock,ID_Provedor)
-    values(M_Nombre,M_Stock,M_ID_Provedor);
+	insert into Materiales(Nombre,Stock,ID_proveedor)
+    values(M_Nombre,M_Stock,M_ID_proveedor);
 end//
 Delimiter ;
 
@@ -275,13 +275,13 @@ CREATE PROCEDURE Actualizar_Material(
 	IN M_ID_Material INT,
     IN M_Nombre VARCHAR(50),
     IN M_Stock INT,
-    IN M_ID_Provedor INT
+    IN M_ID_proveedor INT
 )
 BEGIN
     UPDATE Materiales
     SET Nombre = M_Nombre,
         Stock = M_Stock,
-        ID_Provedor = M_ID_Provedor
+        ID_proveedor = M_ID_proveedor
     WHERE ID_Material = M_ID_Material;
 END//
 DELIMITER ;
@@ -300,15 +300,15 @@ DELIMITER ;
 -- Insert Ingredientes
 Delimiter //
 create procedure Insertar_Ingredientes(
-	in I_ID_Provedor int,
+	in I_ID_proveedor int,
     in I_Nombre varchar(50),
     in I_Fecha_Recepcion datetime,
     in I_stock int,
-    in I_Concervacion varchar(50)
+    in I_Conservacion varchar(50)
 )
 begin
-	insert into Ingredientes(ID_Provedor,Nombre,Fecha_Recepcion,stock,Concervacion)
-    values (I_ID_Provedor,I_Nombre,I_Fecha_Recepcion,I_stock,I_Concervacion);
+	insert into Ingredientes(ID_proveedor,Nombre,Fecha_Recepcion,stock,Conservacion)
+    values (I_ID_proveedor,I_Nombre,I_Fecha_Recepcion,I_stock,I_Conservacion);
     
 end//
 Delimiter ;
@@ -321,16 +321,16 @@ CREATE PROCEDURE Actualizar_Ingredientes(
     IN I_Nombre VARCHAR(50),
     IN I_Fecha_Recepcion DATETIME,
     IN I_Stock INT,
-    IN I_Concervacion VARCHAR(50)
+    IN I_Conservacion VARCHAR(50)
 )
 BEGIN
     UPDATE Ingredientes
     SET 
-        ID_Provedor = I_ID_Proveedor,
+        ID_proveedor = I_ID_Proveedor,
         Nombre = I_Nombre,
         Fecha_Recepcion = I_Fecha_Recepcion,
         Stock = I_Stock,
-        Concervacion = I_Concervacion
+        Conservacion = I_Conservacion
     WHERE ID_Ingredientes = I_ID_Ingrediente;
 END //
 DELIMITER ;
@@ -427,27 +427,27 @@ Call Insertar_sueldos(3,1800);
 Call Insertar_sueldos(4,2600);
 Call Insertar_sueldos(5,2500);
 
-call Insertar_Tipo_Provedores("Servicio al Cliente");
-call Insertar_Tipo_Provedores("Verduras");
-call Insertar_Tipo_Provedores("Carnes");
-call Insertar_Tipo_Provedores("Mariscos");
-call Insertar_Tipo_Provedores("Materiales inmuebles");
-call Insertar_Tipo_Provedores("Materiales cosina");
-call Insertar_Tipo_Provedores("Otros");
+call Insertar_Tipo_proveedores("Servicio al Cliente");
+call Insertar_Tipo_proveedores("Verduras");
+call Insertar_Tipo_proveedores("Carnes");
+call Insertar_Tipo_proveedores("Mariscos");
+call Insertar_Tipo_proveedores("Materiales inmuebles");
+call Insertar_Tipo_proveedores("Materiales cosina");
+call Insertar_Tipo_proveedores("Otros");
 
-call Insertar_Provedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
-call insertar_provedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
-call insertar_provedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
-call insertar_provedores("Pescadería Martínez", 4, "6693456789", "ana.martinez@pescaderia.com");
-call insertar_provedores("Cerdos Piggy",3, "6604567890", "carlos.gonzalez@panaderia.com");
-call insertar_provedores("Dulcería Sánchez", 7, "6615678901", "sofia.sanchez@dulceria.com");
-call insertar_provedores("Ferretería Rodríguez", 6, "6626789012", "alejandro.rodriguez@ferreteria.com");
-call insertar_provedores("IKEA", 5, "6648901234", "pablo.diaz@IKEA.com");
-call insertar_provedores("SR.Yamato", 2 , "6659012345", "luisa.martin@takataka.com");
-call insertar_provedores("IKEA", 6, "6660123456", "ana.fernandez@electrodomesticos.com");
-call insertar_provedores("Mueblería Ruiz", 6, "6671234567", "javier.ruiz@muebleria.com");
-call insertar_provedores("Mar profundo", 4, "6615678901", "sofia.herrera@example.com");
-call insertar_provedores("Todo X Comensales", 1, "6643679864", "sofia.herrera@example.com");
+call Insertar_proveedores("Carnes The Dog",3,"6618974656","Juan.Carnes@gmail.com");
+call insertar_proveedores("Verduras López", 2, "6671234567", "laura.lopez@frutas.com");
+call insertar_proveedores("Productos Lácteos García", 7, "6682345678", "pedro.garcia@lacteos.com");
+call insertar_proveedores("Pescadería Martínez", 4, "6693456789", "ana.martinez@pescaderia.com");
+call insertar_proveedores("Cerdos Piggy",3, "6604567890", "carlos.gonzalez@panaderia.com");
+call insertar_proveedores("Dulcería Sánchez", 7, "6615678901", "sofia.sanchez@dulceria.com");
+call insertar_proveedores("Ferretería Rodríguez", 6, "6626789012", "alejandro.rodriguez@ferreteria.com");
+call insertar_proveedores("IKEA", 5, "6648901234", "pablo.diaz@IKEA.com");
+call insertar_proveedores("SR.Yamato", 2 , "6659012345", "luisa.martin@takataka.com");
+call insertar_proveedores("IKEA", 6, "6660123456", "ana.fernandez@electrodomesticos.com");
+call insertar_proveedores("Mueblería Ruiz", 6, "6671234567", "javier.ruiz@muebleria.com");
+call insertar_proveedores("Mar profundo", 4, "6615678901", "sofia.herrera@example.com");
+call insertar_proveedores("Todo X Comensales", 1, "6643679864", "sofia.herrera@example.com");
 
 CALL Insertar_Material("Mesa de Banquete", 2, 7);
 CALL Insertar_Material("Silla de Banquete", 2, 7);
@@ -547,8 +547,8 @@ JOIN Categorias c ON p.id_categoria = c.id_categoria;
 -- Tipos de proveedores
 CREATE VIEW Proveedor_Tipo AS
 SELECT tp.nombre AS Tipo, p.nombre, p.telefono, p.correo
-FROM Provedores p
-JOIN Tipo_Provedores tp ON p.id_tipoprovedores = tp.id_tipoprovedores;
+FROM proveedores p
+JOIN Tipo_proveedores tp ON p.id_tipoproveedores = tp.id_tipoproveedores;
 
 -- Informacion completa de pedidos
 CREATE VIEW Info_Pedidos AS
@@ -569,7 +569,7 @@ GROUP BY pl.nombre;
 CREATE VIEW InventarioMaterialesPorProveedor AS
 SELECT pr.Nombre AS Proveedor, m.Nombre AS Material, m.Stock
 FROM Materiales m
-INNER JOIN Provedores pr ON m.ID_Provedor = pr.ID_Provedor;
+INNER JOIN proveedores pr ON m.ID_proveedor = pr.ID_proveedor;
 
 -- Sueldos
 CREATE VIEW ResumenSueldosPorRol AS
@@ -656,9 +656,9 @@ BEGIN
     DECLARE proveedor_telefono VARCHAR(50);
     IF NEW.Stock = 0 THEN
         SELECT telefono INTO proveedor_telefono
-        FROM Provedores
-        WHERE ID_Provedor = (
-            SELECT ID_Provedor
+        FROM proveedores
+        WHERE ID_proveedor = (
+            SELECT ID_proveedor
             FROM Ingredientes
             WHERE ID_Ingredientes = NEW.ID_Ingredientes
         );
