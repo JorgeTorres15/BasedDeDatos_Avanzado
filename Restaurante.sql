@@ -565,6 +565,28 @@ FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
 
+-- Inventario Materiales
+CREATE VIEW InventarioMaterialesPorProveedor AS
+SELECT pr.Nombre AS Proveedor, m.Nombre AS Material, m.Stock
+FROM Materiales m
+INNER JOIN Provedores pr ON m.ID_Provedor = pr.ID_Provedor;
+
+-- Sueldos
+CREATE VIEW ResumenSueldosPorRol AS
+SELECT r.Nombre AS Rol, SUM(s.Sueldo) AS Total_Sueldos
+FROM Personal p
+INNER JOIN Rol r ON p.ID_Rol = r.ID_Rol
+INNER JOIN Sueldos s ON p.ID_Rol = s.ID_Rol
+GROUP BY r.Nombre;
+
+-- Platillo mas vendido
+CREATE VIEW PlatilloMasVendido AS
+SELECT p.Nombre AS Platillo, COUNT(*) AS Cantidad_Pedidos
+FROM Pedidos pe
+INNER JOIN Platillos p ON pe.ID_Platillo = p.ID_Platillo
+GROUP BY p.Nombre
+LIMIT 1;
+
 -- TRIGGERS
 
 -- Calcular total de pedido
@@ -773,15 +795,30 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Clientes Por Tipo de Cliente
+DELIMITER //
+CREATE FUNCTION ClientesPorTipoCliente(ID_Tipocliente INT) RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+    DECLARE clientesLista VARCHAR(255);
+    SELECT GROUP_CONCAT(Nombre) INTO clientesLista FROM Clientes WHERE ID_Tipocliente = ID_Tipocliente;
+    RETURN clientesLista;
+END //
+DELIMITER ;
+
 SELECT MarcarPedidoEntregado(1);
 SELECT * FROM Pedidos;
 SELECT ContarPedidosPorCliente(1);
 SELECT CalcularTotalVentasPorMes(3);
 SELECT PlatillosPorCategoria(1);
+SELECT ClientesPorTipoCliente(1);
 SELECT * FROM Roles_Personal;
 SELECT * FROM Categorias_Platillos;
 SELECT * FROM Proveedor_Tipo;
 SELECT * FROM Info_Pedidos;
 SELECT * FROM Ingresos_Platillos;
+SELECT * FROM InventarioMaterialesPorProveedor;
+SELECT * FROM ResumenSueldosPorRol;
+SELECT * FROM PlatilloMasVendido;
 SELECT * FROM AuditoriaOperaciones;
 SELECT * FROM Alertas;
