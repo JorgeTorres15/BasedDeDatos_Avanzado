@@ -104,19 +104,20 @@ create table if not exists Pedidos(
 	foreign key (ID_Platillo) references Platillos(ID_Platillo)
 	);
         
-	create table if not exists Alertas(
-		ID INT AUTO_INCREMENT PRIMARY KEY,
-		Mensaje VARCHAR(255),
-		Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists Alertas(
+	ID_Alerta int primary key auto_increment,
+	Mensaje varchar(250),
+	Fecha timestamp default current_timestamp
 	);
     
-    create table if not exists AuditoriaOperaciones (
-		ID_Auditoria INT AUTO_INCREMENT PRIMARY KEY,
-		TipoOperacion VARCHAR(10),
-		NombreTabla VARCHAR(64),
-		Detalles TEXT,
-		FechaOperacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+create table if not exists AuditoriaOperaciones (
+	ID_Auditoria INT primary key auto_increment,
+	TipoOperacion varchar(100),
+	NombreTabla varchar(100),
+	Detalles varchar(250),
+	FechaOperacion timestamp default current_timestamp
 	);
+
 
 -- ROLES DE USUARIO
 
