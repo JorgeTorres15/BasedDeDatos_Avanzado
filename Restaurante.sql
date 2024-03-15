@@ -591,11 +591,11 @@ DELIMITER ;
 
 -- Stock de un producto llega a cero
 DELIMITER //
-CREATE TRIGGER notificar AFTER INSERT ON Ingredientes
+CREATE TRIGGER notificar AFTER UPDATE ON Ingredientes
 FOR EACH ROW
 BEGIN
     IF NEW.Stock = 0 THEN
-        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente está por debajo de 10 unidades.');
+        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente ha llegado a cero.');
     END IF;
 END//
 DELIMITER //
@@ -606,7 +606,7 @@ CREATE TRIGGER ChecaStock AFTER UPDATE ON Ingredientes
 FOR EACH ROW
 BEGIN
     IF NEW.stock < 10 THEN
-        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente ha llegado a cero.');
+        INSERT INTO Alertas (Mensaje) VALUES ('El stock de un ingrediente está por debajo de 10 unidades.');
     END IF;
 END//
 DELIMITER //
@@ -704,7 +704,11 @@ CALL Eliminar_Personal(10);
 CALL Actualizar_Material(7, "Sillon" , 4, 6);
 CALL Eliminar_Material(8);
 Call Actualizar_Ingredientes(2, 2, "Lechuga", NOW(), 17, "Refrigerado");
+Call Actualizar_Ingredientes(4, 5, "carne de pato", NOW(), 8, "Refrigerado");
+Call Actualizar_Ingredientes(6, 5, "melon", NOW(), 0, "Refrigerado");
 CALL Eliminar_Ingredientes(15);
+
+SELECT * FROM Ingredientes;
 
 call Insertar_pedidos(1,1,1,now());
 call Insertar_pedidos(2,1,1,now());
