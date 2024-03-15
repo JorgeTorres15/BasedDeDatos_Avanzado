@@ -118,6 +118,8 @@ create table if not exists Pedidos(
 		FechaOperacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);
 
+-- ROLES DE USUARIO
+
 drop role if exists Administrador;
 create role Administrador;
 grant all privileges on chinatown.* to Administrador;
@@ -130,7 +132,9 @@ drop role if exists Empleado;
 create role Empleado;
 grant select on chinatown.* to Empleado;
 
--- Rol
+-- STORED PROCEDURES
+
+-- Insert Rol
 DELIMITER //
 create procedure Insertar_Roles(
     in r_Nombre varchar(50)
@@ -141,7 +145,7 @@ begin
 end//
 DELIMITER ;
 
--- Personal
+-- Insert Personal
 DELIMITER //
 create procedure Insertar_Personal(
     in p_Nombre varchar(50),
@@ -156,6 +160,7 @@ begin
 end//
 DELIMITER ;
 
+-- Update Personal
 DELIMITER //
 CREATE PROCEDURE Actualizar_Personal(
 	IN p_ID_personal INT,
@@ -178,6 +183,7 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Delete Personal
 DELIMITER //
 CREATE PROCEDURE Eliminar_Personal(
     IN p_ID_Personal INT
@@ -188,7 +194,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Tipo cliente
+-- Insert Tipo cliente
 DELIMITER //
 create procedure Insertar_Tipo_Cliente(
     in tc_Nombre varchar(50))
@@ -199,7 +205,7 @@ begin
 end//
 DELIMITER ;
 
--- Cliente 
+-- Insert Cliente 
 DELIMITER //
 create procedure Insertar_Clientes(
     in C_ID_Tipocliente int,
@@ -213,7 +219,7 @@ begin
 end//
 DELIMITER ;
 
--- Sueldos 
+-- Insert Sueldos 
 Delimiter //
 create procedure Insertar_sueldos(
 	in S_ID_Rol int ,
@@ -225,7 +231,7 @@ begin
 end //
 Delimiter ;
 
--- Tipo Provedores
+-- Insert Tipo Provedores
 Delimiter //
 create procedure Insertar_Tipo_Provedores(
 	in tp_Nombre varchar(50)
@@ -236,7 +242,7 @@ begin
 end//Insertar_Tipo_Provedores
 Delimiter ;
 
--- Provedores
+-- Insert Provedores
 Delimiter //
 create procedure Insertar_Provedores(
     in P_Nombre varchar(50),
@@ -250,7 +256,7 @@ begin
 end//
 Delimiter //
 
--- Materiales
+-- Insert Materiales
 Delimiter //
 create procedure Insertar_Material(
 	in M_Nombre varchar(50),
@@ -263,6 +269,7 @@ begin
 end//
 Delimiter ;
 
+-- Update Materiales
 DELIMITER //
 CREATE PROCEDURE Actualizar_Material(
 	IN M_ID_Material INT,
@@ -279,6 +286,7 @@ BEGIN
 END//
 DELIMITER ;
 
+-- Delete Materiales
 DELIMITER //
 CREATE PROCEDURE Eliminar_Material(
     IN M_ID INT
@@ -289,7 +297,7 @@ BEGIN
 END//
 DELIMITER ;
 
--- Ingredientes
+-- Insert Ingredientes
 Delimiter //
 create procedure Insertar_Ingredientes(
 	in I_ID_Provedor int,
@@ -305,6 +313,7 @@ begin
 end//
 Delimiter ;
 
+-- Update Ingredientes
 DELIMITER //
 CREATE PROCEDURE Actualizar_Ingredientes(
     IN I_ID_Ingrediente INT,
@@ -326,6 +335,7 @@ BEGIN
 END //
 DELIMITER ;
 
+-- Delete Ingredientes
 DELIMITER //
 CREATE PROCEDURE Eliminar_Ingredientes(
     IN I_ID_Ingrediente INT
@@ -336,7 +346,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- Categorias
+-- Insert Categorias
 Delimiter //
 create procedure Insertar_Categorias(
 	in Cat_Nombre varchar(50)
@@ -348,7 +358,7 @@ begin
 end //
 Delimiter ;
 
--- Platillos
+-- Insert Platillos
 Delimiter //
 create procedure Insertar_platillo(
 	in pla_Nombre varchar(50),
@@ -363,7 +373,7 @@ begin
 end//
 Delimiter ;
 
--- Pedidos
+-- Insert Pedidos
 Delimiter //
 create procedure Insertar_pedidos(
 	in ped_ID_Cliente int,
@@ -520,6 +530,8 @@ CALL Insertar_platillo('Sopa de wonton', 'Caldo de pollo con wontons rellenos de
 CALL Insertar_platillo('Pato laqueado', 'Pato crujiente con piel dorada servido con salsa hoisin y crepes.', 15.99, 1, 10);
 CALL Insertar_platillo('Tofu mapo', 'Tofu suave y picante con carne de cerdo en una salsa de frijol picante.', 9.75, 1, 11);
 
+-- VISTAS
+
 -- Roles del personal
 CREATE VIEW Roles_Personal AS
 SELECT p.nombre, p.apellido, r.nombre AS rol
@@ -552,6 +564,8 @@ SELECT pl.nombre, SUM(pe.total) AS Ingresos
 FROM Pedidos pe
 JOIN Platillos pl ON pe.id_platillo = pl.id_platillo
 GROUP BY pl.nombre;
+
+-- TRIGGERS
 
 -- Calcular total de pedido
 DELIMITER //
@@ -715,6 +729,8 @@ call Insertar_pedidos(2,1,1,now());
 call Insertar_pedidos(1,1,1,now());
 call Insertar_pedidos(1,1,1,now());
 call Insertar_pedidos(1,1,1,now());
+
+-- FUNCIONES
 
 -- Marcar Pedido Entregado
 DELIMITER //
