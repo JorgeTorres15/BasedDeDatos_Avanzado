@@ -722,8 +722,6 @@ Call Actualizar_Ingredientes(4, 5, "carne de pato", NOW(), 8, "Refrigerado");
 Call Actualizar_Ingredientes(6, 5, "melon", NOW(), 0, "Refrigerado");
 CALL Eliminar_Ingredientes(15);
 
-SELECT * FROM Ingredientes;
-
 call Insertar_pedidos(1,1,1,now());
 call Insertar_pedidos(2,1,1,now());
 call Insertar_pedidos(1,1,1,now());
@@ -776,6 +774,7 @@ END //
 DELIMITER ;
 
 SELECT MarcarPedidoEntregado(1);
+SELECT * FROM Pedidos;
 SELECT ContarPedidosPorCliente(1);
 SELECT CalcularTotalVentasPorMes(3);
 SELECT PlatillosPorCategoria(1);
