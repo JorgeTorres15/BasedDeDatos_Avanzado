@@ -1,1 +1,66 @@
+use Pookemon;
+
+db.tipo.insertMany([
+    {nombre:"Fuego"},
+    {nombre:"Agua"},
+    {nombre:"Tierra"},
+    {nombre:"Aire"}
+]);
+
+db.estadisticas_base.insertMany([
+    { ps:"85",  ataque:"50",defensa:"89",especial:"90",velocidad:"87"},
+    { ps: "85", ataque: "50", defensa: "89", especial: "90", velocidad: "87" },
+    { ps: "82", ataque: "55", defensa: "87", especial: "88", velocidad: "85" },
+    { ps: "87", ataque: "48", defensa: "91", especial: "92", velocidad: "89" },
+    { ps: "84", ataque: "52", defensa: "86", especial: "91", velocidad: "86" },
+    { ps: "86", ataque: "53", defensa: "90", especial: "89", velocidad: "88" },
+    { ps: "83", ataque: "49", defensa: "88", especial: "87", velocidad: "90" },
+    { ps: "88", ataque: "51", defensa: "92", especial: "86", velocidad: "91" },
+    { ps: "81", ataque: "54", defensa: "85", especial: "93", velocidad: "84" },
+    { ps: "89", ataque: "47", defensa: "93", especial: "85", velocidad: "92" },
+    { ps: "84", ataque: "56", defensa: "88", especial: "94", velocidad: "83" },
+    { ps: "87", ataque: "45", defensa: "90", especial: "86", velocidad: "94" },
+    { ps: "82", ataque: "57", defensa: "87", especial: "95", velocidad: "82" },
+    { ps: "86", ataque: "46", defensa: "91", especial: "84", velocidad: "93" },
+    { ps: "83", ataque: "58", defensa: "89", especial: "83", velocidad: "95" },
+    { ps: "88", ataque: "44", defensa: "92", especial: "82", velocidad: "96" }
+]);
+
+db.movimientos.insertMany([
+    {nombre:"Golpe de realidad",potencia:"80",precision_mov:"60",descripcion:"Es un movimiento que afecta la realidad de el pokemon rival",pp:"80"},
+    { nombre: "Golpe de realidad 2", potencia: "80", precision_mov: "60", descripcion: "Es un movimiento que distorsiona la realidad del Pokémon oponente", pp: "80" },
+    { nombre: "Golpe de realidad 3", potencia: "82", precision_mov: "58", descripcion: "Es un ataque que desafía la percepción del Pokémon rival", pp: "75" },
+    { nombre: "Golpe de distorsión", potencia: "85", precision_mov: "55", descripcion: "Un golpe que hace que el Pokémon enemigo vea la realidad distorsionada", pp: "85" },
+    { nombre: "Golpe del espacio", potencia: "78", precision_mov: "63", descripcion: "Un movimiento que distorsiona el espacio alrededor del Pokémon enemigo", pp: "70" },
+    { nombre: "Realidad alterada", potencia: "81", precision_mov: "59", descripcion: "Un ataque que causa una alteración en la percepción de la realidad del oponente", pp: "90" },
+    { nombre: "Golpe de ensueño", potencia: "79", precision_mov: "61", descripcion: "Un golpe que sumerge al Pokémon rival en un profundo sueño ilusorio", pp: "65" },
+    { nombre: "Golpe de ilusión", potencia: "83", precision_mov: "57", descripcion: "Un impacto que crea ilusiones en la mente del Pokémon rival", pp: "80" },
+    { nombre: "Golpe de percepción", potencia: "77", precision_mov: "64", descripcion: "Un golpe que desafía la percepción del Pokémon rival", pp: "75" },
+    { nombre: "Golpe de surrealismo", potencia: "80", precision_mov: "60", descripcion: "Un ataque que sumerge al Pokémon en un estado surrealista", pp: "85" },
+    { nombre: "Golpe de desilusión", potencia: "82", precision_mov: "58", descripcion: "Un golpe que hace que el Pokémon rival se desilusione consigo mismo", pp: "70" },
+    { nombre: "Golpe de introspección", potencia: "85", precision_mov: "55", descripcion: "Un ataque que lleva al Pokémon enemigo a una profunda introspección", pp: "90" },
+    { nombre: "Golpe del delirio", potencia: "78", precision_mov: "63", descripcion: "Un ataque que sumerge al Pokémon enemigo en un estado de delirio", pp: "70" },
+    { nombre: "Golpe de alucinación", potencia: "81", precision_mov: "59", descripcion: "Un golpe que hace que el Pokémon enemigo vea alucinaciones", pp: "80" },
+    { nombre: "Golpe de desconcierto", potencia: "79", precision_mov: "61", descripcion: "Un movimiento que deja al Pokémon rival desconcertado", pp: "65" },
+    { nombre: "Golpe de irrealidad", potencia: "83", precision_mov: "57", descripcion: "Un ataque que hace que la realidad se vuelva borrosa para el oponente", pp: "75"}  
+]);
+
+db.efecto_secundario.insertMany([
+  { efecto_secundario: "Desangrado" },
+  { efecto_secundario: "Parálisis" },
+  { efecto_secundario: "Confusión" },
+  { efecto_secundario: "Quemadura" },
+  { efecto_secundario: "Congelación" },
+  { efecto_secundario: "Sueño" },
+  { efecto_secundario: "Envenenamiento" },
+  { efecto_secundario: "Congelación" },
+  { efecto_secundario: "Parálisis" },
+  { efecto_secundario: "Confusión" },
+  { efecto_secundario: "Sueño" },
+  { efecto_secundario: "Quemadura" },
+  { efecto_secundario: "Parálisis" },
+  { efecto_secundario: "Envenenamiento" },
+  { efecto_secundario: "Sueño" }
+]);
+
 
