@@ -235,7 +235,6 @@ db.pokemon_forma_evolucion.insertMany([
     { "numero_pokedex": 3, "id_forma_evolucion": 3 }
 ]);
 
-db.pokemon.find()
 
 db.forma_evolucion.insertMany([
     { "id_forma_evolucion": 1, "tipo_evolucion": 1 },
@@ -243,5 +242,22 @@ db.forma_evolucion.insertMany([
     { "id_forma_evolucion": 3, "tipo_evolucion": 3 },
     { "id_forma_evolucion": 4, "tipo_evolucion": 4 }
 ]);
+
+
+// Buscarlos guapos
+db.pokemon.find().pretty()
+
+// Mostrar los documentos en forma de tabla
+printTable(db.pokemon.find().toArray())
+
+// condicion
+db.pokemon.find({ "tipo": "Fuego" }).pretty()
+
+// Un borrado solo cambialo a many 
+db.pokemon.deleteOne({ "campo": "valor" })
+
+// borra la coleccion(tabla)
+db.pokemon.drop()
+
 
 
