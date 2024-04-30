@@ -1,66 +1,247 @@
-use Pookemon;
+use Pokemon;
+
+db.pokemon.insertMany([
+    { numero_pokedex: 1, nombre: "Bulbasaur", peso: 6.9, altura: 0.7 },
+    { numero_pokedex: 2, nombre: "Ivysaur", peso: 13.0, altura: 1.0 },
+    { numero_pokedex: 3, nombre: "Venusaur", peso: 100.0, altura: 2.0 },
+    { numero_pokedex: 4, nombre: "Charmander", peso: 8.5, altura: 0.6 },
+    { numero_pokedex: 5, nombre: "Charmeleon", peso: 19.0, altura: 1.1 },
+    { numero_pokedex: 6, nombre: "Charizard", peso: 90.5, altura: 1.7 },
+    { numero_pokedex: 7, nombre: "Squirtle", peso: 9.0, altura: 0.5 },
+    { numero_pokedex: 8, nombre: "Wartortle", peso: 22.5, altura: 1.0 },
+    { numero_pokedex: 9, nombre: "Blastoise", peso: 85.5, altura: 1.6 },
+    { numero_pokedex: 10, nombre: "Caterpie", peso: 2.9, altura: 0.3 },
+    { numero_pokedex: 11, nombre: "Metapod", peso: 9.9, altura: 0.7 },
+    { numero_pokedex: 12, nombre: "Butterfree", peso: 32.0, altura: 1.1 },
+    { numero_pokedex: 13, nombre: "Weedle", peso: 3.2, altura: 0.3 },
+    { numero_pokedex: 14, nombre: "Kakuna", peso: 10.0, altura: 0.6 },
+    { numero_pokedex: 15, nombre: "Beedrill", peso: 29.5, altura: 1.0 }
+]);
+
+db.tipo_ataque.insertMany([
+    { id_tipo_ataque: 1, tipo: "Fuego" },
+    { id_tipo_ataque: 2, tipo: "Agua" },
+    { id_tipo_ataque: 3, tipo: "Planta" },
+    { id_tipo_ataque: 4, tipo: "Eléctrico" },
+    { id_tipo_ataque: 5, tipo: "Normal" },
+    { id_tipo_ataque: 6, tipo: "Volador" },
+    { id_tipo_ataque: 7, tipo: "Psíquico" },
+    { id_tipo_ataque: 8, tipo: "Tierra" },
+    { id_tipo_ataque: 9, tipo: "Roca" },
+    { id_tipo_ataque: 10, tipo: "Hielo" },
+    { id_tipo_ataque: 11, tipo: "Bicho" },
+    { id_tipo_ataque: 12, tipo: "Fantasma" },
+    { id_tipo_ataque: 13, tipo: "Lucha" },
+    { id_tipo_ataque: 14, tipo: "Veneno" },
+    { id_tipo_ataque: 15, tipo: "Acero" }
+]);
 
 db.tipo.insertMany([
-    {nombre:"Fuego"},
-    {nombre:"Agua"},
-    {nombre:"Tierra"},
-    {nombre:"Aire"}
+    { id_tipo: 1, nombre: "Fuego", id_tipo_ataque: 1 },
+    { id_tipo: 2, nombre: "Agua", id_tipo_ataque: 2 },
+    { id_tipo: 3, nombre: "Planta", id_tipo_ataque: 3 },
+    { id_tipo: 4, nombre: "Eléctrico", id_tipo_ataque: 4 },
+    { id_tipo: 5, nombre: "Normal", id_tipo_ataque: 5 },
+    { id_tipo: 6, nombre: "Volador", id_tipo_ataque: 6 },
+    { id_tipo: 7, nombre: "Psíquico", id_tipo_ataque: 7 },
+    { id_tipo: 8, nombre: "Tierra", id_tipo_ataque: 8 },
+    { id_tipo: 9, nombre: "Roca", id_tipo_ataque: 9 },
+    { id_tipo: 10, nombre: "Hielo", id_tipo_ataque: 10 },
+    { id_tipo: 11, nombre: "Bicho", id_tipo_ataque: 11 },
+    { id_tipo: 12, nombre: "Fantasma", id_tipo_ataque: 12 },
+    { id_tipo: 13, nombre: "Lucha", id_tipo_ataque: 13 },
+    { id_tipo: 14, nombre: "Veneno", id_tipo_ataque: 14 },
+    { id_tipo: 15, nombre: "Acero", id_tipo_ataque: 15 }
+]);
+
+db.pokemon_tipo.insertMany([
+    { numero_pokedex: 1, id_tipo: 1 },
+    { numero_pokedex: 1, id_tipo: 3 },
+    { numero_pokedex: 2, id_tipo: 1 },
+    { numero_pokedex: 2, id_tipo: 3 },
+    { numero_pokedex: 3, id_tipo: 1 },
+    { numero_pokedex: 3, id_tipo: 3 },
+    { numero_pokedex: 4, id_tipo: 2 },
+    { numero_pokedex: 5, id_tipo: 2 },
+    { numero_pokedex: 6, id_tipo: 2 },
+    { numero_pokedex: 7, id_tipo: 2 },
+    { numero_pokedex: 8, id_tipo: 2 },
+    { numero_pokedex: 9, id_tipo: 2 },
+    { numero_pokedex: 10, id_tipo: 3 },
+    { numero_pokedex: 11, id_tipo: 3 },
+    { numero_pokedex: 12, id_tipo: 3 }
 ]);
 
 db.estadisticas_base.insertMany([
-    { ps:"85",  ataque:"50",defensa:"89",especial:"90",velocidad:"87"},
-    { ps: "85", ataque: "50", defensa: "89", especial: "90", velocidad: "87" },
-    { ps: "82", ataque: "55", defensa: "87", especial: "88", velocidad: "85" },
-    { ps: "87", ataque: "48", defensa: "91", especial: "92", velocidad: "89" },
-    { ps: "84", ataque: "52", defensa: "86", especial: "91", velocidad: "86" },
-    { ps: "86", ataque: "53", defensa: "90", especial: "89", velocidad: "88" },
-    { ps: "83", ataque: "49", defensa: "88", especial: "87", velocidad: "90" },
-    { ps: "88", ataque: "51", defensa: "92", especial: "86", velocidad: "91" },
-    { ps: "81", ataque: "54", defensa: "85", especial: "93", velocidad: "84" },
-    { ps: "89", ataque: "47", defensa: "93", especial: "85", velocidad: "92" },
-    { ps: "84", ataque: "56", defensa: "88", especial: "94", velocidad: "83" },
-    { ps: "87", ataque: "45", defensa: "90", especial: "86", velocidad: "94" },
-    { ps: "82", ataque: "57", defensa: "87", especial: "95", velocidad: "82" },
-    { ps: "86", ataque: "46", defensa: "91", especial: "84", velocidad: "93" },
-    { ps: "83", ataque: "58", defensa: "89", especial: "83", velocidad: "95" },
-    { ps: "88", ataque: "44", defensa: "92", especial: "82", velocidad: "96" }
+    { numero_pokedex: 1, ps: 45, ataque: 49, defensa: 49, especial: 65, velocidad: 45 },
+    { numero_pokedex: 2, ps: 60, ataque: 62, defensa: 63, especial: 80, velocidad: 60 },
+    { numero_pokedex: 3, ps: 80, ataque: 82, defensa: 83, especial: 100, velocidad: 80 },
+    { numero_pokedex: 4, ps: 39, ataque: 52, defensa: 43, especial: 60, velocidad: 65 },
+    { numero_pokedex: 5, ps: 58, ataque: 64, defensa: 58, especial: 80, velocidad: 80 },
+    { numero_pokedex: 6, ps: 78, ataque: 84, defensa: 78, especial: 109, velocidad: 100 },
+    { numero_pokedex: 7, ps: 44, ataque: 48, defensa: 65, especial: 50, velocidad: 43 },
+    { numero_pokedex: 8, ps: 59, ataque: 63, defensa: 80, especial: 65, velocidad: 58 },
+    { numero_pokedex: 9, ps: 79, ataque: 83, defensa: 100, especial: 85, velocidad: 78 },
+    { numero_pokedex: 10, ps: 45, ataque: 30, defensa: 35, especial: 20, velocidad: 45 },
+    { numero_pokedex: 11, ps: 50, ataque: 20, defensa: 55, especial: 25, velocidad: 30 },
+    { numero_pokedex: 12, ps: 60, ataque: 45, defensa: 50, especial: 90, velocidad: 70 },
+    { numero_pokedex: 13, ps: 40, ataque: 35, defensa: 30, especial: 20, velocidad: 50 },
+    { numero_pokedex: 14, ps: 45, ataque: 25, defensa: 50, especial: 25, velocidad: 35 },
+    { numero_pokedex: 15, ps: 65, ataque: 90, defensa: 40, especial: 45, velocidad: 75 }
 ]);
 
-db.movimientos.insertMany([
-    {nombre:"Golpe de realidad",potencia:"80",precision_mov:"60",descripcion:"Es un movimiento que afecta la realidad de el pokemon rival",pp:"80"},
-    { nombre: "Golpe de realidad 2", potencia: "80", precision_mov: "60", descripcion: "Es un movimiento que distorsiona la realidad del Pokémon oponente", pp: "80" },
-    { nombre: "Golpe de realidad 3", potencia: "82", precision_mov: "58", descripcion: "Es un ataque que desafía la percepción del Pokémon rival", pp: "75" },
-    { nombre: "Golpe de distorsión", potencia: "85", precision_mov: "55", descripcion: "Un golpe que hace que el Pokémon enemigo vea la realidad distorsionada", pp: "85" },
-    { nombre: "Golpe del espacio", potencia: "78", precision_mov: "63", descripcion: "Un movimiento que distorsiona el espacio alrededor del Pokémon enemigo", pp: "70" },
-    { nombre: "Realidad alterada", potencia: "81", precision_mov: "59", descripcion: "Un ataque que causa una alteración en la percepción de la realidad del oponente", pp: "90" },
-    { nombre: "Golpe de ensueño", potencia: "79", precision_mov: "61", descripcion: "Un golpe que sumerge al Pokémon rival en un profundo sueño ilusorio", pp: "65" },
-    { nombre: "Golpe de ilusión", potencia: "83", precision_mov: "57", descripcion: "Un impacto que crea ilusiones en la mente del Pokémon rival", pp: "80" },
-    { nombre: "Golpe de percepción", potencia: "77", precision_mov: "64", descripcion: "Un golpe que desafía la percepción del Pokémon rival", pp: "75" },
-    { nombre: "Golpe de surrealismo", potencia: "80", precision_mov: "60", descripcion: "Un ataque que sumerge al Pokémon en un estado surrealista", pp: "85" },
-    { nombre: "Golpe de desilusión", potencia: "82", precision_mov: "58", descripcion: "Un golpe que hace que el Pokémon rival se desilusione consigo mismo", pp: "70" },
-    { nombre: "Golpe de introspección", potencia: "85", precision_mov: "55", descripcion: "Un ataque que lleva al Pokémon enemigo a una profunda introspección", pp: "90" },
-    { nombre: "Golpe del delirio", potencia: "78", precision_mov: "63", descripcion: "Un ataque que sumerge al Pokémon enemigo en un estado de delirio", pp: "70" },
-    { nombre: "Golpe de alucinación", potencia: "81", precision_mov: "59", descripcion: "Un golpe que hace que el Pokémon enemigo vea alucinaciones", pp: "80" },
-    { nombre: "Golpe de desconcierto", potencia: "79", precision_mov: "61", descripcion: "Un movimiento que deja al Pokémon rival desconcertado", pp: "65" },
-    { nombre: "Golpe de irrealidad", potencia: "83", precision_mov: "57", descripcion: "Un ataque que hace que la realidad se vuelva borrosa para el oponente", pp: "75"}  
+
+
+db.movimiento.insertMany([
+    { id_movimiento: 1, nombre: "Llamarada", potencia: 90, precision: 85, descripcion: "Un fuego abrasador que puede quemar al oponente.", pp: 10, id_tipo: 1, prioridad: 0 },
+    { id_movimiento: 2, nombre: "Rayo Solar", potencia: 120, precision: 100, descripcion: "Absorbe luz solar en un turno para liberar un ataque devastador en el siguiente turno.", pp: 5, id_tipo: 3, prioridad: 1 },
+    { id_movimiento: 3, nombre: "Terremoto", potencia: 100, precision: 100, descripcion: "Provoca un temblor en el suelo que afecta a todos los Pokémon en el campo, excepto los que vuelan.", pp: 10, id_tipo: 8, prioridad: 1 },
+    { id_movimiento: 4, nombre: "Hidrobomba", potencia: 110, precision: 80, descripcion: "Lanza una gran cantidad de agua con gran fuerza.", pp: 5, id_tipo: 2, prioridad: 0 },
+    { id_movimiento: 5, nombre: "Psíquico", potencia: 90, precision: 100, descripcion: "Un ataque psíquico que puede bajar la defensa especial del oponente.", pp: 10, id_tipo: 7, prioridad: 0 },
+    { id_movimiento: 6, nombre: "Ataque Ala", potencia: 60, precision: 100, descripcion: "Un rápido ataque con las alas que puede hacer retroceder al oponente.", pp: 15, id_tipo: 6, prioridad: 2},
+    { id_movimiento: 7, nombre: "Puño Trueno", potencia: 75, precision: 100, descripcion: "Un rápido puñetazo cargado de electricidad.", pp: 15, id_tipo: 4, prioridad: 0 },
+    { id_movimiento: 8, nombre: "Látigo Cepa", potencia: 55, precision: 95, descripcion: "Ataca con tentáculos o lianas. También puede cortar árboles pequeños.", pp: 25, id_tipo: 3, prioridad: 3 },
+    { id_movimiento: 9, nombre: "Golpe Aéreo", potencia: 60, precision: 95, descripcion: "Un ataque que golpea al oponente incluso si está en el aire.", pp: 20, id_tipo: 6, prioridad: 0 },
+    { id_movimiento: 10, nombre: "Colmillo Ígneo", potencia: 65, precision: 95, descripcion: "Muerde al oponente con colmillos ardientes que pueden causar quemaduras.", pp: 25, id_tipo: 1, prioridad: 0 },
+    { id_movimiento: 11, nombre: "Hiperrayo", potencia: 150, precision: 90, descripcion: "Un poderoso rayo que requiere descansar en el siguiente turno.", pp: 5, id_tipo: 5, prioridad: 4 },
+    { id_movimiento: 12, nombre: "Giro Bola", potencia: "Varía",https://www.facebook.com/messages/t/100008698819333/ precision: 100, descripcion: "Un ataque que aumenta su potencia cuanto más lento sea el usuario que el oponente.", pp: 5, id_tipo: 15, prioridad: 0 },
+    { id_movimiento: 13, nombre: "Rueda Fuego", potencia: 60, precision: 100, descripcion: "El usuario rueda y se envuelve en llamas. Puede quemar al oponente.", pp: 25, id_tipo: 1, prioridad: 0 },
+    { id_movimiento: 14, nombre: "Rayo Hielo", potencia: 90, precision: 100, descripcion: "Dispara un rayo de hielo que puede congelar al oponente.", pp: 10, id_tipo: 10, prioridad: 0 },
+    { id_movimiento: 15, nombre: "Pulso Dragón", potencia: 85, precision: 100, descripcion: "Dispara una ráfaga de energía dragonica que no falla nunca.", pp: 10, id_tipo: 16, prioridad: 0 }
 ]);
 
 db.efecto_secundario.insertMany([
-  { efecto_secundario: "Desangrado" },
-  { efecto_secundario: "Parálisis" },
-  { efecto_secundario: "Confusión" },
-  { efecto_secundario: "Quemadura" },
-  { efecto_secundario: "Congelación" },
-  { efecto_secundario: "Sueño" },
-  { efecto_secundario: "Envenenamiento" },
-  { efecto_secundario: "Congelación" },
-  { efecto_secundario: "Parálisis" },
-  { efecto_secundario: "Confusión" },
-  { efecto_secundario: "Sueño" },
-  { efecto_secundario: "Quemadura" },
-  { efecto_secundario: "Parálisis" },
-  { efecto_secundario: "Envenenamiento" },
-  { efecto_secundario: "Sueño" }
+    { id_efecto_secundario: 1, efecto_secundario: "Desangrado" },
+    { id_efecto_secundario: 2, efecto_secundario: "Parálisis" },
+    { id_efecto_secundario: 3, efecto_secundario: "Confusión" },
+    { id_efecto_secundario: 4, efecto_secundario: "Quemadura" },
+    { id_efecto_secundario: 5, efecto_secundario: "Congelación" },
+    { id_efecto_secundario: 6, efecto_secundario: "Sueño" },
+    { id_efecto_secundario: 7, efecto_secundario: "Envenenamiento" },
+    { id_efecto_secundario: 8, efecto_secundario: "Congelación" },
+    { id_efecto_secundario: 9, efecto_secundario: "Parálisis" },
+    { id_efecto_secundario: 10, efecto_secundario: "Confusión" },
+    { id_efecto_secundario: 11, efecto_secundario: "Sueño" },
+    { id_efecto_secundario: 12, efecto_secundario: "Quemadura" },
+    { id_efecto_secundario: 13, efecto_secundario: "Parálisis" },
+    { id_efecto_secundario: 14, efecto_secundario: "Envenenamiento" },
+    { id_efecto_secundario: 15, efecto_secundario: "Sueño" }
+]);
+
+db.movimiento_efecto_secundario.insertMany([
+    { id_efecto_secundario: 1, id_movimiento: 1, probabilidad: 10 },
+    { id_efecto_secundario: 2, id_movimiento: 2, probabilidad: 20 },
+    { id_efecto_secundario: 3, id_movimiento: 3, probabilidad: 15 },
+    { id_efecto_secundario: 4, id_movimiento: 4, probabilidad: 25 },
+    { id_efecto_secundario: 5, id_movimiento: 5, probabilidad: 30 },
+    { id_efecto_secundario: 6, id_movimiento: 6, probabilidad: 10 },
+    { id_efecto_secundario: 7, id_movimiento: 7, probabilidad: 15 },
+    { id_efecto_secundario: 8, id_movimiento: 8, probabilidad: 20 },
+    { id_efecto_secundario: 9, id_movimiento: 9, probabilidad: 25 },
+    { id_efecto_secundario: 10, id_movimiento: 10, probabilidad: 10 },
+    { id_efecto_secundario: 11, id_movimiento: 11, probabilidad: 15 },
+    { id_efecto_secundario: 12, id_movimiento: 12, probabilidad: 20 },
+    { id_efecto_secundario: 13, id_movimiento: 13, probabilidad: 25 },
+    { id_efecto_secundario: 14, id_movimiento: 14, probabilidad: 10 },
+    { id_efecto_secundario: 15, id_movimiento: 15, probabilidad: 15 }
+]);
+
+db.tipo_forma_aprendizaje.insertMany([
+    { id_tipo_aprendizaje: 1, tipo_aprendizaje: "Nivel" },
+    { id_tipo_aprendizaje: 2, tipo_aprendizaje: "MT/MO" },
+    { id_tipo_aprendizaje: 3, tipo_aprendizaje: "Huevo" },
+    { id_tipo_aprendizaje: 4, tipo_aprendizaje: "Tutor" },
+    { id_tipo_aprendizaje: 5, tipo_aprendizaje: "Evento" }
+]);
+
+db.createCollection("forma_aprendizaje");
+
+db.forma_aprendizaje.insertMany([
+    { id_forma_aprendizaje: 1, id_tipo_aprendizaje: 1 },
+    { id_forma_aprendizaje: 2, id_tipo_aprendizaje: 2 },
+    { id_forma_aprendizaje: 3, id_tipo_aprendizaje: 3 },
+    { id_forma_aprendizaje: 4, id_tipo_aprendizaje: 4 },
+    { id_forma_aprendizaje: 5, id_tipo_aprendizaje: 5 }
+]);
+
+db.MT.insertMany([
+    { id_forma_aprendizaje: 1, MT: "MT01" },
+    { id_forma_aprendizaje: 2, MT: "MT02" },
+    { id_forma_aprendizaje: 3, MT: "MT03" },
+    { id_forma_aprendizaje: 4, MT: "MT04" },
+    { id_forma_aprendizaje: 5, MT: "MT05" }
+]);
+
+
+db.MO.insertMany([
+    { id_forma_aprendizaje: 1, MO: "MO01" },
+    { id_forma_aprendizaje: 2, MO: "MO02" },
+    { id_forma_aprendizaje: 3, MO: "MO03" },
+    { id_forma_aprendizaje: 4, MO: "MO04" },
+    { id_forma_aprendizaje: 5, MO: "MO05" }
+]);
+
+db.nivel_aprendizaje.insertMany([
+    { "id_forma_aprendizaje": "1", "nivel": "Principiante" },
+    { "id_forma_aprendizaje": "2", "nivel": "Intermedio" },
+    { "id_forma_aprendizaje": "3", "nivel": "Avanzado" },
+    { "id_forma_aprendizaje": "4", "nivel": "Experto" },
+    { "id_forma_aprendizaje": "5", "nivel": "Inicial" }
+]);
+
+db.pokemon_movimiento_forma.insertMany([
+    { "numero_pokedex": 1, "id_movimiento": 1, "id_forma_aprendizaje": 1 },
+    { "numero_pokedex": 2, "id_movimiento": 2, "id_forma_aprendizaje": 3 },
+    { "numero_pokedex": 3, "id_movimiento": 3, "id_forma_aprendizaje": 2 },
+    { "numero_pokedex": 4, "id_movimiento": 4, "id_forma_aprendizaje": 4 },
+    { "numero_pokedex": 5, "id_movimiento": 5, "id_forma_aprendizaje": 5 }
+]);
+
+db.tipo_evolucion.insertMany([
+    { "id_tipo_evolucion": 1, "tipo_evolucion": "Evolución normal" },
+    { "id_tipo_evolucion": 2, "tipo_evolucion": "Intercambio" },
+    { "id_tipo_evolucion": 3, "tipo_evolucion": "Piedra lunar" },
+    { "id_tipo_evolucion": 4, "tipo_evolucion": "Felicidad" }
+]);
+
+
+db.evoluciona_de.insertMany([
+    { "pokemon_evolucionado": 2, "pokemon_origen": 1 },
+    { "pokemon_evolucionado": 3, "pokemon_origen": 2 },
+    { "pokemon_evolucionado": 4, "pokemon_origen": 3 }
+]);
+
+db.tipo_piedra.insertMany([
+    { "id_tipo_piedra": 1, "nombre_piedra": "Piedra fuego" },
+    { "id_tipo_piedra": 2, "nombre_piedra": "Piedra agua" },
+    { "id_tipo_piedra": 3, "nombre_piedra": "Piedra hoja" }
+]);
+
+db.piedra.insertMany([
+    { "id_forma_evolucion": 1, "id_tipo_piedra": 1 },
+    { "id_forma_evolucion": 2, "id_tipo_piedra": 2 },
+    { "id_forma_evolucion": 3, "id_tipo_piedra": 3 }
+]);
+
+db.nivel_evolucion.insertMany([
+    { "id_forma_evolucion": 1, "nivel": 16 },
+    { "id_forma_evolucion": 2, "nivel": 32 },
+    { "id_forma_evolucion": 3, "nivel": 40 }
+]);
+
+db.pokemon_forma_evolucion.insertMany([
+    { "numero_pokedex": 1, "id_forma_evolucion": 1 },
+    { "numero_pokedex": 2, "id_forma_evolucion": 2 },
+    { "numero_pokedex": 3, "id_forma_evolucion": 3 }
+]);
+
+db.pokemon.find()
+
+db.forma_evolucion.insertMany([
+    { "id_forma_evolucion": 1, "tipo_evolucion": 1 },
+    { "id_forma_evolucion": 2, "tipo_evolucion": 2 },
+    { "id_forma_evolucion": 3, "tipo_evolucion": 3 },
+    { "id_forma_evolucion": 4, "tipo_evolucion": 4 }
 ]);
 
 
