@@ -1,0 +1,707 @@
+drop database if exists Metacritics2;
+create database Metacritics2;
+use Metacritics2;
+
+CREATE TABLE Plataforma (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Desarrollador (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Publicado_por (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Genero (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Clasificacion_Edad (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Tipo_Plataforma (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Videojuegos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(255),
+    Fecha_Lanzamiento varchar(100),
+    Meta_Score INT,
+    Catalogado_por_Meta VARCHAR(255),
+    User_Score DECIMAL(3, 1),
+    Catalogado_por_Usuario VARCHAR(255),
+    Plataforma_ID INT,
+    Desarrollador_ID INT,
+    Publicado_por_ID INT,
+    Genero_ID INT,
+    Clasificacion_Edad_ID INT,
+    Tipo_Plataforma_ID INT,
+    FOREIGN KEY (Plataforma_ID) REFERENCES Plataforma(id) ON DELETE SET NULL,
+    FOREIGN KEY (Desarrollador_ID) REFERENCES Desarrollador(id) ON DELETE SET NULL,
+    FOREIGN KEY (Publicado_por_ID) REFERENCES Publicado_por(id) ON DELETE SET NULL,
+    FOREIGN KEY (Genero_ID) REFERENCES Genero(id) ON DELETE SET NULL,
+    FOREIGN KEY (Clasificacion_Edad_ID) REFERENCES Clasificacion_Edad(id) ON DELETE SET NULL,
+    FOREIGN KEY (Tipo_Plataforma_ID) REFERENCES Tipo_Plataforma(id) ON DELETE SET NULL
+);
+
+
+CREATE TABLE Registro_Operaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Tabla VARCHAR(255),
+    Operacion VARCHAR(50),
+    Detalles TEXT,
+    Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Inserts para la tabla Plataforma
+INSERT INTO Plataforma (Nombre) VALUES 
+('PlayStation 5'), 
+('Xbox Series X'), 
+('Nintendo Switch'), 
+('PC'), 
+('PlayStation 4'), 
+('Xbox One'), 
+('iOS'), 
+('Android'), 
+('Stadia'), 
+('PlayStation 3');
+
+-- Inserts para la tabla Desarrollador
+INSERT INTO Desarrollador (Nombre) VALUES 
+('Naughty Dog'), 
+('CD Projekt Red'), 
+('Rockstar Games'), 
+('Ubisoft'), 
+('Bungie'), 
+('Bethesda'), 
+('Square Enix'), 
+('Capcom'), 
+('Valve'), 
+('Insomniac Games');
+
+-- Inserts para la tabla Publicado_por
+INSERT INTO Publicado_por (Nombre) VALUES 
+('Sony Interactive Entertainment'), 
+('Microsoft'), 
+('Nintendo'), 
+('Ubisoft'), 
+('Bethesda Softworks'), 
+('Square Enix'), 
+('Activision'), 
+('Electronic Arts'), 
+('Capcom'), 
+('Warner Bros. Interactive Entertainment');
+
+-- Inserts para la tabla Genero
+INSERT INTO Genero (Nombre) VALUES 
+('Accion'), 
+('Aventura'), 
+('RPG'), 
+('Shooter'), 
+('Plataformas'), 
+('Estrategia'), 
+('Deportes'), 
+('Carreras'), 
+('Lucha'), 
+('Simulacion');
+
+-- Inserts para la tabla Clasificacion_Edad
+INSERT INTO Clasificacion_Edad (Nombre) VALUES 
+('E (Everyone)'), 
+('E10+ (Everyone 10 and older)'), 
+('T (Teen)'), 
+('M (Mature 17+)'), 
+('AO (Adults Only 18+)'), 
+('RP (Rating Pending)'), 
+('C (Children)'), 
+('GA (General Audience)'), 
+('MA (Mature Audience)'), 
+('A (Adults)');
+
+-- Inserts para la tabla Tipo_Plataforma
+INSERT INTO Tipo_Plataforma (Tipo) VALUES 
+('Consola'), 
+('PC'), 
+('Movil'), 
+('Nube'), 
+('VR'), 
+('AR'), 
+('Web'), 
+('Hibrido'), 
+('Portatil'), 
+('Arcade');
+
+-- Inserts para la tabla Videojuegos
+INSERT INTO Videojuegos (
+    Nombre, Fecha_Lanzamiento, Meta_Score, Catalogado_por_Meta, 
+    User_Score, Catalogado_por_Usuario, Plataforma_ID, Desarrollador_ID, 
+    Publicado_por_ID, Genero_ID, Clasificacion_Edad_ID, Tipo_Plataforma_ID
+) VALUES 
+('The Last of Us Part II', '2020-06-19', 93, 'Metacritic', 9.3, 'Usuarios', 1, 1, 1, 1, 4, 1),
+('Cyberpunk 2077', '2020-12-10', 86, 'Metacritic', 7.0, 'Usuarios', 2, 2, 2, 3, 4, 2),
+('Red Dead Redemption 2', '2018-10-26', 97, 'Metacritic', 9.7, 'Usuarios', 4, 3, 2, 2, 4, 2),
+('Assassins Creed Valhalla', '2020-11-10', 84, 'Metacritic', 8.2, 'Usuarios', 2, 4, 4, 2, 4, 1),
+('Destiny 2', '2017-09-06', 85, 'Metacritic', 8.5, 'Usuarios', 1, 5, 7, 4, 3, 1),
+('The Elder Scrolls V: Skyrim', '2011-11-11', 94, 'Metacritic', 9.4, 'Usuarios', 4, 6, 5, 3, 4, 2),
+('Final Fantasy VII Remake', '2020-04-10', 87, 'Metacritic', 8.7, 'Usuarios', 1, 7, 6, 3, 3, 1),
+('Resident Evil 3', '2020-04-03', 79, 'Metacritic', 7.9, 'Usuarios', 1, 8, 9, 2, 4, 1),
+('Half-Life: Alyx', '2020-03-23', 92, 'Metacritic', 9.2, 'Usuarios', 4, 9, 10, 1, 4, 5),
+('Marvels Spider-Man', '2018-09-07', 87, 'Metacritic', 8.7, 'Usuarios', 1, 10, 1, 2, 3, 1);
+
+-- Procedimientos para la tabla Plataforma
+DELIMITER //
+CREATE PROCEDURE CrearPlataforma(IN platform_name VARCHAR(255))
+BEGIN
+    INSERT INTO Plataforma (Nombre) VALUES (platform_name);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllPlataformas()
+BEGIN
+    SELECT * FROM Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetByIdPlataforma(IN platform_id INT)
+BEGIN
+    SELECT * FROM Plataforma WHERE id = platform_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdPlataforma(IN platform_id INT, IN platform_name VARCHAR(255))
+BEGIN
+    UPDATE Plataforma SET Nombre = platform_name WHERE id = platform_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllPlataformas()
+BEGIN
+    DELETE FROM Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdPlataforma(IN platform_id INT)
+BEGIN
+    DELETE FROM Plataforma WHERE id = platform_id;
+END //
+DELIMITER ;
+
+-- Procedimientos para la tabla Desarrollador
+DELIMITER //
+CREATE PROCEDURE CrearDesarrollador(IN developer_name VARCHAR(255))
+BEGIN
+    INSERT INTO Desarrollador (Nombre) VALUES (developer_name);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllDesarrolladores()
+BEGIN
+    SELECT * FROM Desarrollador;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetByIdDesarrollador(IN developer_id INT)
+BEGIN
+    SELECT * FROM Desarrollador WHERE id = developer_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdDesarrollador(IN developer_id INT, IN developer_name VARCHAR(255))
+BEGIN
+    UPDATE Desarrollador SET Nombre = developer_name WHERE id = developer_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdDesarrollador(IN developer_id INT)
+BEGIN
+    DELETE FROM Desarrollador WHERE id = developer_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllDesarrolladores()
+BEGIN
+    DELETE FROM Desarrollador;
+END //
+DELIMITER ;
+
+-- Procedimientos para la tabla Publicado_por
+DELIMITER //
+CREATE PROCEDURE CrearPublicadoPor(IN publisher_name VARCHAR(255))
+BEGIN
+    INSERT INTO Publicado_por (Nombre) VALUES (publisher_name);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllPublicadoPor()
+BEGIN
+    SELECT * FROM Publicado_por;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetByIdPublicadoPor(IN publisher_id INT)
+BEGIN
+    SELECT * FROM Publicado_por WHERE id = publisher_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdPublicadoPor(IN publisher_id INT, IN publisher_name VARCHAR(255))
+BEGIN
+    UPDATE Publicado_por SET Nombre = publisher_name WHERE id = publisher_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllPublicadoPor()
+BEGIN
+    DELETE FROM Publicado_por;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdPublicadoPor(IN publisher_id INT)
+BEGIN
+    DELETE FROM Publicado_por WHERE id = publisher_id;
+END //
+DELIMITER ;
+
+-- Procedimientos para la tabla Genero
+DELIMITER //
+CREATE PROCEDURE CrearGenero(IN genre_name VARCHAR(255))
+BEGIN
+    INSERT INTO Genero (Nombre) VALUES (genre_name);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllGeneros()
+BEGIN
+    SELECT * FROM Genero;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetByIdGenero(IN genre_id INT)
+BEGIN
+    SELECT * FROM Genero WHERE id = genre_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdGenero(IN genre_id INT, IN genre_name VARCHAR(255))
+BEGIN
+    UPDATE Genero SET Nombre = genre_name WHERE id = genre_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllGeneros()
+BEGIN
+    DELETE FROM Genero;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteGeneroById(IN genre_id INT)
+BEGIN
+    DELETE FROM Genero WHERE id = genre_id;
+END //
+DELIMITER ;
+
+-- Procedimientos para la tabla Clasificacion_Edad
+DELIMITER //
+CREATE PROCEDURE CrearClasificacionEdad(IN edad_nombre VARCHAR(255))
+BEGIN
+    INSERT INTO Clasificacion_Edad (Nombre) VALUES (edad_nombre);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllClasificacionEdad()
+BEGIN
+    SELECT * FROM Clasificacion_Edad;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetClasificacionEdadById(IN edad_id INT)
+BEGIN
+    SELECT * FROM Clasificacion_Edad WHERE id = edad_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdClasificacionEdad(IN edad_id INT, IN edad_nombre VARCHAR(255))
+BEGIN
+    UPDATE Clasificacion_Edad SET Nombre = edad_nombre WHERE id = edad_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllClasificacionEdad()
+BEGIN
+    DELETE FROM Clasificacion_Edad;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdClasificacionEdad(IN edad_id INT)
+BEGIN
+    DELETE FROM Clasificacion_Edad WHERE id = edad_id;
+END //
+DELIMITER ;
+
+
+-- Procedimientos para la tabla Tipo_Plataforma
+DELIMITER //
+CREATE PROCEDURE CrearTipoPlataforma(IN tipo_nombre VARCHAR(255))
+BEGIN
+    INSERT INTO Tipo_Plataforma (Tipo) VALUES (tipo_nombre);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllTipoPlataforma()
+BEGIN
+    SELECT * FROM Tipo_Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetTipoPlataformaById(IN tipo_id INT)
+BEGIN
+    SELECT * FROM Tipo_Plataforma WHERE id = tipo_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdTipoPlataforma(IN tipo_id INT, IN tipo_nombre VARCHAR(255))
+BEGIN
+    UPDATE Tipo_Plataforma SET Tipo = tipo_nombre WHERE id = tipo_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllTipoPlataforma()
+BEGIN
+    DELETE FROM Tipo_Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdTipoPlataforma(IN tipo_id INT)
+BEGIN
+    DELETE FROM Tipo_Plataforma WHERE id = tipo_id;
+END //
+DELIMITER ;
+
+-- Procedimientos para la tabla Videojuegos
+DELIMITER //
+CREATE PROCEDURE CrearVideojuego(
+    IN game_name VARCHAR(255),
+    IN release_date VARCHAR(100),
+    IN meta_score INT,
+    IN rated_by_meta VARCHAR(255),
+    IN user_score DECIMAL(3, 1),
+    IN rated_by_user VARCHAR(255),
+    IN platform_id INT,
+    IN developer_id INT,
+    IN publisher_id INT,
+    IN genre_id INT,
+    IN clasificacion_edad_id INT,
+    IN tipo_plataforma_id INT
+)
+BEGIN
+    INSERT INTO Videojuegos (
+        Nombre, Fecha_Lanzamiento, Meta_Score, Catalogado_por_Meta, 
+        User_Score, Catalogado_por_Usuario, Plataforma_ID, Desarrollador_ID, 
+        Publicado_por_ID, Genero_ID, Clasificacion_Edad_ID, Tipo_Plataforma_ID
+    ) VALUES (
+        game_name, release_date, meta_score, rated_by_meta, 
+        user_score, rated_by_user, platform_id, developer_id, 
+        publisher_id, genre_id, clasificacion_edad_id, tipo_plataforma_id
+    );
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllVideojuegos()
+BEGIN
+    SELECT * FROM Videojuegos;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetVideojuegoById(IN game_id INT)
+BEGIN
+    SELECT * FROM Videojuegos WHERE id = game_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdVideojuego(
+    IN game_id INT,
+    IN game_name VARCHAR(255),
+    IN release_date VARCHAR(100),
+    IN meta_score INT,
+    IN rated_by_meta VARCHAR(255),
+    IN user_score DECIMAL(3, 1),
+    IN rated_by_user VARCHAR(255),
+    IN platform_id INT,
+    IN developer_id INT,
+    IN publisher_id INT,
+    IN genre_id INT,
+    IN clasificacion_edad_id INT,
+    IN tipo_plataforma_id INT
+)
+BEGIN
+    UPDATE Videojuegos
+    SET 
+        Nombre = game_name,
+        Fecha_Lanzamiento = release_date,
+        Meta_Score = meta_score,
+        Catalogado_por_Meta = rated_by_meta,
+        User_Score = user_score,
+        Catalogado_por_Usuario = rated_by_user,
+        Plataforma_ID = platform_id,
+        Desarrollador_ID = developer_id,
+        Publicado_por_ID = publisher_id,
+        Genero_ID = genre_id,
+        Clasificacion_Edad_ID = clasificacion_edad_id,
+        Tipo_Plataforma_ID = tipo_plataforma_id
+    WHERE id = game_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllVideojuegos()
+BEGIN
+    DELETE FROM Videojuegos;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteByIdVideojuego(IN game_id INT)
+BEGIN
+    DELETE FROM Videojuegos WHERE id = game_id;
+END //
+DELIMITER ;
+
+
+-- Trigger para la tabla Plataforma
+DELIMITER //
+CREATE TRIGGER Plataforma_Insert_Trigger
+AFTER INSERT ON Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Plataforma', 'Insert', CONCAT('Se inserto la plataforma con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Plataforma_Update_Trigger
+AFTER UPDATE ON Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Plataforma', 'Update', CONCAT('Se actualizo la plataforma con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Plataforma_Delete_Trigger
+AFTER DELETE ON Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Plataforma', 'Delete', CONCAT('Se elimino la plataforma con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Desarrollador
+DELIMITER //
+CREATE TRIGGER Desarrollador_Insert_Trigger
+AFTER INSERT ON Desarrollador
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Desarrollador', 'Insert', CONCAT('Se inserto el desarrollador con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Desarrollador_Update_Trigger
+AFTER UPDATE ON Desarrollador
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Desarrollador', 'Update', CONCAT('Se actualizo el desarrollador con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Desarrollador_Delete_Trigger
+AFTER DELETE ON Desarrollador
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Desarrollador', 'Delete', CONCAT('Se elimino el desarrollador con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Publicado_por
+DELIMITER //
+CREATE TRIGGER PublicadoPor_Insert_Trigger
+AFTER INSERT ON Publicado_por
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Publicado_por', 'Insert', CONCAT('Se inserto el publicador con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER PublicadoPor_Update_Trigger
+AFTER UPDATE ON Publicado_por
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Publicado_por', 'Update', CONCAT('Se actualizo el publicador con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER PublicadoPor_Delete_Trigger
+AFTER DELETE ON Publicado_por
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Publicado_por', 'Delete', CONCAT('Se elimino el publicador con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Genero
+DELIMITER //
+CREATE TRIGGER Genero_Insert_Trigger
+AFTER INSERT ON Genero
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Genero', 'Insert', CONCAT('Se inserto el genero con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Genero_Update_Trigger
+AFTER UPDATE ON Genero
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Genero', 'Update', CONCAT('Se actualizo el genero con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Genero_Delete_Trigger
+AFTER DELETE ON Genero
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Genero', 'Delete', CONCAT('Se elimino el genero con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Clasificacion_Edad
+DELIMITER //
+CREATE TRIGGER Clasificacion_Edad_Insert_Trigger
+AFTER INSERT ON Clasificacion_Edad
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Clasificacion_Edad', 'Insert', CONCAT('Se inserto la clasificacion de edad con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Clasificacion_Edad_Update_Trigger
+AFTER UPDATE ON Clasificacion_Edad
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Clasificacion_Edad', 'Update', CONCAT('Se actualizo la clasificacion de edad con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Clasificacion_Edad_Delete_Trigger
+AFTER DELETE ON Clasificacion_Edad
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Clasificacion_Edad', 'Delete', CONCAT('Se elimino la clasificacion de edad con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Tipo_Plataforma
+DELIMITER //
+CREATE TRIGGER Tipo_Plataforma_Insert_Trigger
+AFTER INSERT ON Tipo_Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Tipo_Plataforma', 'Insert', CONCAT('Se inserto el tipo de plataforma con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Tipo_Plataforma_Update_Trigger
+AFTER UPDATE ON Tipo_Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Tipo_Plataforma', 'Update', CONCAT('Se actualizo el tipo de plataforma con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Tipo_Plataforma_Delete_Trigger
+AFTER DELETE ON Tipo_Plataforma
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Tipo_Plataforma', 'Delete', CONCAT('Se elimino el tipo de plataforma con ID: ', OLD.id));
+END //
+DELIMITER ;
+
+-- Trigger para la tabla Videojuegos
+DELIMITER //
+CREATE TRIGGER Videojuegos_Insert_Trigger
+AFTER INSERT ON Videojuegos
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Videojuegos', 'Insert', CONCAT('Se inserto el videojuego con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Videojuegos_Update_Trigger
+AFTER UPDATE ON Videojuegos
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Videojuegos', 'Update', CONCAT('Se actualizo el videojuego con ID: ', NEW.id));
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER Videojuegos_Delete_Trigger
+AFTER DELETE ON Videojuegos
+FOR EACH ROW
+BEGIN
+    INSERT INTO Registro_Operaciones (Tabla, Operacion, Detalles) VALUES ('Videojuegos', 'Delete', CONCAT('Se elimino el videojuego con ID: ', OLD.id));
+END //
+DELIMITER ;
