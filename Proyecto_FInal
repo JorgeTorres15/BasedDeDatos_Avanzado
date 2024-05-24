@@ -1,5 +1,5 @@
-drop database if exists Metacritics2;
-create database Metacritics2;
+drop database if exists Metacritics;
+create database Metacritics;
 use Metacritics2;
 
 CREATE TABLE Plataforma (
