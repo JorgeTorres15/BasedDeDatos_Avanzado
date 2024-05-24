@@ -1,6 +1,6 @@
 drop database if exists Metacritics;
 create database Metacritics;
-use Metacritics2;
+use Metacritics;
 
 CREATE TABLE Plataforma (
     id INT AUTO_INCREMENT PRIMARY KEY,
