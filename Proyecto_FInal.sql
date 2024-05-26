@@ -54,6 +54,206 @@ CREATE TABLE Videojuegos (
     FOREIGN KEY (Tipo_Plataforma_ID) REFERENCES Tipo_Plataforma(id) ON DELETE SET NULL
 );
 
+CREATE TABLE Tipo_Venta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Ventas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Videojuego_ID INT,
+    Tipo_Venta_ID INT,
+    Fecha DATE,
+    Cantidad INT,
+    Precio DECIMAL(10, 2),
+    FOREIGN KEY (Videojuego_ID) REFERENCES Videojuegos(id) ON DELETE SET NULL,
+    FOREIGN KEY (Tipo_Venta_ID) REFERENCES Tipo_Venta(id) ON DELETE SET NULL
+);
+
+select * from Ventas;
+
+CREATE TABLE Registro_Operaciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Tabla VARCHAR(255),
+    Operacion VARCHAR(50),
+    Detalles TEXT,
+    Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+-- Inserts para la tabla Plataforma
+INSERT INTO Plataforma (Nombre) VALUES 
+('PlayStation 5'), 
+('Xbox Series X'), 
+('Nintendo Switch'), 
+('PC'), 
+('PlayStation 4'), 
+('Xbox One'), 
+('iOS'), 
+('Android'), 
+('Stadia'), 
+('PlayStation 3');
+
+-- Inserts para la tabla Desarrollador
+INSERT INTO Desarrollador (Nombre) VALUES 
+('Naughty Dog'), 
+('CD Projekt Red'), 
+('Rockstar Games'), 
+('Ubisoft'), 
+('Bungie'), 
+('Bethesda'), 
+('Square Enix'), 
+('Capcom'), 
+('Valve'), 
+('Insomniac Games');
+
+-- Inserts para la tabla Publicado_por
+INSERT INTO Publicado_por (Nombre) VALUES 
+('Sony Interactive Entertainment'), 
+('Microsoft'), 
+('Nintendo'), 
+('Ubisoft'), 
+('Bethesda Softworks'), 
+('Square Enix'), 
+('Activision'), 
+('Electronic Arts'), 
+('Capcom'), 
+('Warner Bros. Interactive Entertainment');
+
+-- Inserts para la tabla Genero
+INSERT INTO Genero (Nombre) VALUES 
+('Accion'), 
+('Aventura'), 
+('RPG'), 
+('Shooter'), 
+('Plataformas'), 
+('Estrategia'), 
+('Deportes'), 
+('Carreras'), 
+('Lucha'), 
+('Simulacion');
+
+-- Inserts para la tabla Clasificacion_Edad
+INSERT INTO Clasificacion_Edad (Nombre) VALUES 
+('E (Everyone)'), 
+('E10+ (Everyone 10 and older)'), 
+('T (Teen)'), 
+('M (Mature 17+)'), 
+('AO (Adults Only 18+)'), 
+('RP (Rating Pending)'), 
+('C (Children)'), 
+('GA (General Audience)'), 
+('MA (Mature Audience)'), 
+('A (Adults)');
+
+-- Inserts para la tabla Tipo_Plataforma
+INSERT INTO Tipo_Plataforma (Tipo) VALUES 
+('Consola'), 
+('PC'), 
+('Movil'), 
+('Nube'), 
+('VR'), 
+('AR'), 
+('Web'), 
+('Hibrido'), 
+('Portatil'), 
+('Arcade');
+
+-- Inserts para la tabla Tipo_Venta
+INSERT INTO Tipo_Venta (Tipo) VALUES 
+('Fisica'), 
+('En Linea');
+
+-- Inserts para la tabla Videojuegos
+INSERT INTO Videojuegos (
+    Nombre, Fecha_Lanzamiento, Meta_Score, Catalogado_por_Meta, 
+    User_Score, Catalogado_por_Usuario, Plataforma_ID, Desarrollador_ID, 
+    Publicado_por_ID, Genero_ID, Clasificacion_Edad_ID, Tipo_Plataforma_ID
+) VALUES 
+('The Last of Us Part II', '2020-06-19', 93, 'Metacritic', 9.3, 'Usuarios', 1, 1, 1, 1, 4, 1),
+('Cyberpunk 2077', '2020-12-10', 86, 'Metacritic', 7.0, 'Usuarios', 2, 2, 2, 3, 4, 2),
+('Red Dead Redemption 2', '2018-10-26', 97, 'Metacritic', 9.7, 'Usuarios', 4, 3, 2, 2, 4, 2),
+('Assassins Creed Valhalla', '2020-11-10', 84, 'Metacritic', 8.2, 'Usuarios', 2, 4, 4, 2, 4, 1),
+('Destiny 2', '2017-09-06', 85, 'Metacritic', 8.5, 'Usuarios', 1, 5, 7, 4, 3, 1),
+('The Elder Scrolls V: Skyrim', '2011-11-11', 94, 'Metacritic', 9.4, 'Usuarios', 4, 6, 5, 3, 4, 2),
+('Final Fantasy VII Remake', '2020-04-10', 87, 'Metacritic', 8.7, 'Usuarios', 1, 7, 6, 3, 3, 1),
+('Resident Evil 3', '2020-04-03', 79, 'Metacritic', 7.9, 'Usuarios', 1, 8, 9, 2, 4, 1),
+('Half-Life: Alyx', '2020-03-23', 92, 'Metacritic', 9.2, 'Usuarios', 4, 9, 10, 1, 4, 5),
+('Marvels Spider-Man', '2018-09-07', 87, 'Metacritic', 8.7, 'Usuarios', 1, 10, 1, 2, 3, 1);
+
+-- Inserts para la tabla Ventas
+INSERT INTO Ventas (Videojuego_ID, Tipo_Venta_ID, Fecha, Cantidad, Precio) VALUES
+(1, 1, '2021-01-15', 5000, 59.99),  -- The Last of Us Part II, Fisica
+(1, 2, '2021-01-20', 2000, 59.99),  -- The Last of Us Part II, En Linea
+(2, 1, '2021-02-10', 4000, 59.99),  -- Cyberpunk 2077, Fisica
+(2, 2, '2021-02-12', 3000, 59.99),  -- Cyberpunk 2077, En Linea
+(3, 1, '2021-03-05', 3500, 59.99),  -- Red Dead Redemption 2, Fisica
+(3, 2, '2021-03-10', 2500, 59.99),  -- Red Dead Redemption 2, En Linea
+(4, 1, '2021-04-15', 2200, 59.99),  -- Assassins Creed Valhalla, Fisica
+(4, 2, '2021-04-20', 2800, 59.99),  -- Assassins Creed Valhalla, En Linea
+(5, 1, '2021-05-10', 3000, 59.99),  -- Destiny 2, Fisica
+(5, 2, '2021-05-12', 2000, 59.99),  -- Destiny 2, En Linea
+(6, 1, '2021-06-01', 5000, 59.99),  -- The Elder Scrolls V: Skyrim, Fisica
+(6, 2, '2021-06-05', 4500, 59.99),  -- The Elder Scrolls V: Skyrim, En Linea
+(7, 1, '2021-07-15', 3500, 59.99),  -- Final Fantasy VII Remake, Fisica
+(7, 2, '2021-07-20', 3000, 59.99),  -- Final Fantasy VII Remake, En Linea
+(8, 1, '2021-08-10', 2000, 59.99),  -- Resident Evil 3, Fisica
+(8, 2, '2021-08-12', 1500, 59.99),  -- Resident Evil 3, En Linea
+(9, 1, '2021-09-01', 1800, 59.99),  -- Half-Life: Alyx, Fisica
+(9, 2, '2021-09-05', 2200, 59.99),  -- Half-Life: Alyx, En Linea
+(10, 1, '2021-10-10', 4000, 59.99), -- Marvels Spider-Man, Fisica
+(10, 2, '2021-10-15', 3000, 59.99); -- Marvels Spider-Man, En Linea
+
+-- Procedimientos para la tabla Plataforma
+DELIMITER //
+CREATE PROCEDURE CrearPlataforma(IN platform_name VARCHAR(255))
+BEGIN
+    INSERT INTO Plataforma (Nombre) VALUES (platform_name);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetAllPlataformas()
+BEGIN
+    SELECT * FROM Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetByIdPlataforma(IN platform_id INT)
+BEGIN
+    SELECT * FROM Plataforma WHERE id = platform_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE UpdateByIdPlataforma(IN platform_id INT, IN platform_name VARCHAR(255))
+BEGIN
+    UPDATE Plataforma SET Nombre = platform_name WHERE id = platform_id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteAllPlataformas()
+BEGIN
+    DELETE FROM Plataforma;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE DeleteById
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE Registro_Operaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
