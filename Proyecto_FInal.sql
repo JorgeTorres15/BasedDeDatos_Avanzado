@@ -206,6 +206,24 @@ INSERT INTO Ventas (Videojuego_ID, Tipo_Venta_ID, Fecha, Cantidad, Precio) VALUE
 (10, 1, '2021-10-10', 4000, 59.99), -- Marvels Spider-Man, Fisica
 (10, 2, '2021-10-15', 3000, 59.99); -- Marvels Spider-Man, En Linea
 
+
+-- Creación de la tabla Criticas
+CREATE TABLE Criticas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    videojuego_id INT,
+    critica_calidad_precio ENUM('Buena', 'Mala'),
+    FOREIGN KEY (videojuego_id) REFERENCES Videojuegos(id)
+);
+
+-- Inserción de datos de ejemplo en la tabla Criticas
+INSERT INTO Criticas (videojuego_id, critica_calidad_precio) VALUES
+(1, 'Buena'),
+(2, 'Mala'),
+(3, 'Buena'),
+(4, 'Mala'),
+(5, 'Buena');
+
+
 -- Procedimientos para la tabla Plataforma
 DELIMITER //
 CREATE PROCEDURE CrearPlataforma(IN platform_name VARCHAR(255))
