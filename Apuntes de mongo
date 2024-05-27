@@ -1,47 +1,74 @@
-import pymysql
-import pymongo
+import decimal
+from pymongo import MongoClient
+import mysql.connector
+from datetime import datetime, date
 
-# Conexión a MySQL
-mysql_conn = pymysql.connect(
-    host='localhost',
-    user='tu_usuario',
-    password='tu_contraseña',
-    database='Metacritics'
-)
 
-# Conexión a MongoDB
-mongo_client = pymongo.MongoClient("mongodb://localhost:27017/")
-mongodb = mongo_client["Metacritics"]
+# Funcion para convertir Decimal a float y datetime.date a datetime.datetime
+def convert_data_types(data):
+    if isinstance(data, list):
+        return [convert_data_types(item) for item in data]
+    elif isinstance(data, dict):
+        return {key: convert_data_types(value) for key, value in data.items()}
+    elif isinstance(data, decimal.Decimal):
+        return float(data)
+    elif isinstance(data, date):
+        return datetime.combine(data, datetime.min.time())
+    else:
+        return data
 
-# Función para leer datos de MySQL y transformarlos en documentos para MongoDB
-def migrate_table(mysql_conn, table_name):
-    cursor = mysql_conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute(f"SELECT * FROM {table_name}")
+
+# Funcion para migrar la tabla de MySQL a MongoDB
+def migrate_table(mysql_conn, table):
+    rows = fetch_data_from_mysql(mysql_conn, table)
+
+    # Convertir tipos de datos
+    rows = [convert_data_types(row) for row in rows]
+
+    # Insertar en MongoDB
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['Metacritics'] 
+    collection = db[table]
+    collection.insert_many(rows)
+    print(f"Tabla {table} migrada con exito a MongoDB.")
+
+
+# Funcion para obtener datos de MySQL
+def fetch_data_from_mysql(mysql_conn, table):
+    cursor = mysql_conn.cursor(dictionary=True)
+    cursor.execute(f"SELECT * FROM {table}")
     rows = cursor.fetchall()
+    cursor.close()
+    return rows
 
-    if rows:
-        # Insertar datos en la colección MongoDB correspondiente
-        collection = mongodb[table_name]
-        collection.insert_many(rows)
 
-# Listado de tablas a migrar
-tables_to_migrate = [
-    "Plataforma",
-    "Desarrollador",
-    "Publicado_por",
-    "Genero",
-    "Clasificacion_Edad",
-    "Tipo_Plataforma",
-    "Videojuegos",
-    "Tipo_Venta",
-    "Ventas",
-    "Criticas"
-]
 
-# Migración de cada tabla
-for table in tables_to_migrate:
-    migrate_table(mysql_conn, table)
+if __name__ == "__main__":
+    # Conexion a MySQL
+    mysql_conn = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='Jt299143.',
+        database='Metacritics'
+    )
 
-# Cerrar conexiones
-mysql_conn.close()
-mongo_client.close()
+    # Lista de tablas a migrar
+    tables_to_migrate = [
+        "Plataforma",
+        "Desarrollador",
+        "Publicado_por",
+        "Genero",
+        "Clasificacion_Edad",
+        "Tipo_Plataforma",
+        "Videojuegos",
+        "Tipo_Venta",
+        "Ventas",
+        "Criticas"
+    ]
+
+    # Migracion de cada tabla
+    for table in tables_to_migrate:
+        migrate_table(mysql_conn, table)
+
+    mysql_conn.close()
+    print("Migracion completada.")
