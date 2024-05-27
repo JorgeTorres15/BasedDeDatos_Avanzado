@@ -2,6 +2,19 @@ drop database if exists Metacritics;
 create database Metacritics;
 use Metacritics;
 
+CREATE ROLE usuario;
+CREATE ROLE administrador;
+CREATE ROLE critico;
+
+
+-- Asignar permisos a los roles
+GRANT SELECT ON Metacritics.* TO usuario;
+GRANT INSERT, UPDATE, DELETE ON Metacritics.* TO administrador;
+GRANT SELECT, INSERT, UPDATE ON Metacritics.* TO critico;
+
+
+
+
 CREATE TABLE Plataforma (
     id INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(255) UNIQUE
